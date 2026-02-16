@@ -56,12 +56,10 @@ public class BoardManager : MonoBehaviour
             //Alanýn içerisinde mi
             if (chilcPosition.x >= _width || chilcPosition.x < 0 || chilcPosition.y >= _height || chilcPosition.y < 0)
                 return false;
-            //TODO Return to position
 
             //Node'lar uygun mu
             if (_allNodes[chilcPosition.x, chilcPosition.y].IsOccupied)
                 return false;
-                //TODO Return to position
         }
 
         return true;
@@ -96,10 +94,9 @@ public class BoardManager : MonoBehaviour
     }
     public Vector2Int WorldToGridPosition(Vector3 worldPosition)
     {
-        // Mathf.RoundToInt kullanýyoruz çünkü en yakýn kutuyu istiyoruz.
-        // 2.8 ise 3'e yuvarlasýn, 2.1 ise 2'ye.
+        //Deðerleri yuvarlýyoruz.
         int x = Mathf.RoundToInt(worldPosition.x);
-        int y = Mathf.RoundToInt(worldPosition.z); // Unity Z'si bizim Y'mizdir!
+        int y = Mathf.RoundToInt(worldPosition.z);
 
         return new Vector2Int(x, y);
     }
