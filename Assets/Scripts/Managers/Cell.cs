@@ -11,4 +11,5 @@ public class Cell : MonoBehaviour
 
     private void Awake() => _meshRenderer = _visualPrefab.GetComponent<MeshRenderer>();
     public void SetCellColor(Color color) => _meshRenderer.material.color = color;
+    public void SetCellScale(Vector3 scale) => _visualPrefab.transform.localScale = scale;
 }

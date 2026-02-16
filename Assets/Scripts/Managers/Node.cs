@@ -5,17 +5,20 @@ using UnityEngine;
 [System.Serializable]
 public class Node 
 {
-    public bool isOccupied;
+    public bool IsOccupied;
 
-    public BlockColor color;
+    public BlockColor Color;
 
-    public GameObject storedBlockObject;
+    public GameObject StoredBlockObject;
 
-    public Node(GameObject storedObject)
+    public Transform CellTransform;
+
+    public Node(GameObject storedObject, Transform cellTransform)
     {
-        color = BlockColor.None;
-        isOccupied = false;
-        storedBlockObject = storedObject;
+        Color = BlockColor.None;
+        IsOccupied = false;
+        StoredBlockObject = storedObject;
+        CellTransform = cellTransform;
     }
 }
 
