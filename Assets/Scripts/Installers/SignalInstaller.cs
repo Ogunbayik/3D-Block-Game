@@ -9,6 +9,7 @@ public class SignalInstaller : MonoInstaller
 
         Container.DeclareSignal<GameSignal.OnShapePlaced>();
         Container.DeclareSignal<GameSignal.OnSlotCleared>();
+        Container.DeclareSignal<GameSignal.OnMatchesFound>();
 
         Container.BindSignal<GameSignal.OnSlotCleared>()
             .ToMethod<SpawnManager>((x) => x.CheckAndSpawnNewShapes)

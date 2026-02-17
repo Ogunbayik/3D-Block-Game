@@ -10,4 +10,6 @@ public static class GameSignal
         public OnShapePlaced(GameObject shape) => Shape = shape;
     }
     public class OnSlotCleared { }
+    public class OnMatchesFound { }
+
 }
