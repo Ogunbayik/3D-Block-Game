@@ -56,7 +56,6 @@ public class PlayerController : MonoBehaviour
             if (Physics.Raycast(ray, out RaycastHit groundHit, _rayDistance, _groundLayer))
             {
                 _offset = _selectedShape.transform.position - groundHit.point;
-                Debug.Log($"Seçilen Block: {_selectedShape.name} and Týklanan Pozisyon: {_offset}");
             }
         }
     }
@@ -70,15 +69,12 @@ public class PlayerController : MonoBehaviour
             Vector3 targetPosition = hit.point + _offset;
             _selectedShape.transform.position = targetPosition;
         }
-
-        Debug.Log($"{_selectedShape.name} hareket ettiriliyor.");
     }
     private void HandleReleaseBlock()
     {
         if (!_boardManager.TryPlaceShape(_selectedShape))
         {
             //TODO Go back to position with animation
-            Debug.Log("Selected Block can not released!");
             _selectedShape.transform.position = _selectPosition;
             _selectPosition = Vector3.zero;
             _selectedShape = null;

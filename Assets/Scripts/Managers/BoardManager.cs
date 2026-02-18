@@ -6,6 +6,8 @@ public class BoardManager : MonoBehaviour
 {
     private SignalBus _signalBus;
 
+    private SpawnManager _spawnManager;
+
     [Header("Visual References")]
     [SerializeField] private GameObject _cubePrefab;
     [Header("Board Settings")]
@@ -23,7 +25,11 @@ public class BoardManager : MonoBehaviour
     private Node[,] _allNodes;
 
     [Inject]
-    public void Construct(SignalBus signalBus) => _signalBus = signalBus;
+    public void Construct(SignalBus signalBus, SpawnManager spawnManager)
+    {
+        _signalBus = signalBus;
+        _spawnManager = spawnManager;
+    }
     void Start() => SetupBoard();
     private void SetupBoard()
     {
@@ -62,7 +68,6 @@ public class BoardManager : MonoBehaviour
         foreach(Transform child in block.transform)
         {
             var childPosition = WorldToGridPosition(child.position);
-            Debug.Log($"X: {childPosition.x}, Z: {childPosition.y}");
 
             //Alanýn içerisinde mi
             if (childPosition.x >= _width || childPosition.x < 0 || childPosition.y >= _height || childPosition.y < 0)
@@ -101,28 +106,27 @@ public class BoardManager : MonoBehaviour
 
         return true;
     }
+   
     private void ProcessMatches()
-    {   
+    {
         //Yatay objeler eklendi.
-        var fullRowIndices = GetFullRowIndices();
+        CollectHorizontalMatch();
+        //Dikey objeler eklendi.
+        CollectVerticalMatch();
 
-        foreach(var rowIndex in fullRowIndices)
+        if (_matchHash.Count > 0)
         {
-            for (int x = 0; x < _width; x++)
-            {
-                var block = _allNodes[x, rowIndex].StoredBlockObject;
+            RemoveBlocks(_matchHash);
 
-                if (block != null)
-                {
-                    _matchHash.Add(block);
+            _signalBus.Fire(new GameSignal.OnMatchesFound());
 
-                    if(!_testList.Contains(block))
-                        _testList.Add(block);
-                }
-            }
+            _matchHash.Clear();
         }
 
-        //Dikey objeler eklendi.
+        CheckGameOver();
+    }
+    private void CollectVerticalMatch()
+    {
         var fullColIndices = GetFullColIndices();
 
         foreach (var colIndex in fullColIndices)
@@ -140,18 +144,78 @@ public class BoardManager : MonoBehaviour
                 }
             }
         }
+    }
+    private void CollectHorizontalMatch()
+    {
+        var fullRowIndices = GetFullRowIndices();
 
-        if (_matchHash.Count > 0)
+        foreach (var rowIndex in fullRowIndices)
         {
-            RemoveBlocks(_matchHash);
+            for (int x = 0; x < _width; x++)
+            {
+                var block = _allNodes[x, rowIndex].StoredBlockObject;
 
-            _signalBus.Fire(new GameSignal.OnMatchesFound());
+                if (block != null)
+                {
+                    _matchHash.Add(block);
 
-            _matchHash.Clear();
+                    if (!_testList.Contains(block))
+                        _testList.Add(block);
+                }
+            }
         }
+    }
+    public void CheckGameOver()
+    {
+        var currentShapes = _spawnManager.ActiveShapes;
+        if (currentShapes.Count == 0) return;
+
+        bool canMove = false;
+        foreach (var shape in currentShapes)
+        {
+            if (HasValidPlacement(shape.BlockOffsets))
+            {
+                canMove = true;
+                break;
+            }
+        }
+
+        //TODO Gameover signal 
+        if (canMove)
+            Debug.Log("Still Play");
+        else
+            Debug.Log("Game over");
+    }
+    public bool HasValidPlacement(List<Vector2Int> blockOffsets)
+    {
+        for (int x = 0; x < _width; x++)
+        {
+            for (int z = 0; z < _height; z++)
+            {
+                if (TryFitAt(blockOffsets, x, z))
+                    return true;
+            }
+        }
+        return false;
+    }
+    private bool TryFitAt(List<Vector2Int> blockOffsets, int startX, int startZ)
+    {
+        foreach (Vector2Int offset in blockOffsets)
+        {
+            int targetX = startX + offset.x;
+            int targetZ = startZ + offset.y;
+
+            if (targetX >= _width || targetZ >= _height || targetX < 0 || targetZ < 0)
+                return false;
+
+            if (_allNodes[targetX, targetZ].IsOccupied)
+                return false;
+        }
+        return true;
     }
     private void RemoveBlocks(HashSet<GameObject> blocksToDestroy)
     {
+        //TODO Blocklardaki animasyonu çalýþtýrýp, Daha sonra Destroy etmek lazým
         foreach (var block in blocksToDestroy)
         {
             if (block == null)
@@ -210,17 +274,6 @@ public class BoardManager : MonoBehaviour
         }
 
         return fullColIndices;
-    }
-
-    private void DestroyMatchBlocks()
-    {
-        foreach (var block in _matchHash)
-        {
-            _matchHash.Remove(block);
-            Destroy(block);
-
-            _matchHash.Clear();
-        }
     }
     public Vector2Int WorldToGridPosition(Vector3 worldPosition)
     {

@@ -466,7 +466,7 @@ MonoBehaviour:
   - {fileID: 3139369172403112472, guid: 562c9e6cd016851419b8bbf1fba7aca1, type: 3}
   - {fileID: 8260701529940941472, guid: 765e3c811c1751d478e0c841fcfd45fe, type: 3}
   - {fileID: 5283985311628231034, guid: dd7abd21fbc50b84dad8191c04e5ee81, type: 3}
-  _spawnPositionList:
+  _spawnSlotList:
   - {fileID: 1963696392}
   - {fileID: 861402152}
   - {fileID: 1474330799}
@@ -701,7 +701,7 @@ GameObject:
   - component: {fileID: 861402151}
   - component: {fileID: 861402152}
   m_Layer: 0
-  m_Name: SecondSpawnPoint
+  m_Name: SecondSlot
   m_TagString: Untagged
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -789,7 +789,7 @@ GameObject:
   - component: {fileID: 1474330798}
   - component: {fileID: 1474330799}
   m_Layer: 0
-  m_Name: ThirdSpawnPoint
+  m_Name: ThirdSlot
   m_TagString: Untagged
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -872,7 +872,6 @@ MonoBehaviour:
   _height: 8
   _cellScale: 0.95
   _cellScaleY: 0.1
-  _offsetY: 0
   _testColors:
   - {r: 0.75164366, g: 1, b: 0.2999999, a: 1}
   - {r: 0, g: 1, b: 0.56094694, a: 1}
@@ -920,7 +919,7 @@ GameObject:
   - component: {fileID: 1963696391}
   - component: {fileID: 1963696392}
   m_Layer: 0
-  m_Name: FirstSpawnPoint
+  m_Name: FirstSlot
   m_TagString: Untagged
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
