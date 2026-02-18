@@ -182,7 +182,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 70
   orthographic: 0
   orthographic size: 7.44
   m_Depth: -1
@@ -209,7 +209,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 15, z: 1.23}
+  m_LocalPosition: {x: 3.5, y: 15, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -456,8 +456,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _blockPrefabs:
-  - {fileID: 1937931021461303597, guid: 3a12e20f74d61064ca3c544043ba3af9, type: 3}
-  - {fileID: 5311755991512668230, guid: 8e3a3e29a810c7a43bd76f87e6efcfaa, type: 3}
+  - {fileID: 3131866835065319354, guid: d4ec36d5b3602a643a706c7d6a8e404f, type: 3}
+  - {fileID: 731968435243491709, guid: 3876b4fbd6a9a174ea4945b59e1e51c9, type: 3}
+  - {fileID: 3794565749876584063, guid: 9ac9db0e0a84c124e9a4e5b07ec72a72, type: 3}
+  - {fileID: 8195048289535279053, guid: 2a80c3660e2f9354eb7f25b11db49e67, type: 3}
+  - {fileID: 5715499007694811036, guid: 74385a625fb9d87428726097c26fa0aa, type: 3}
+  - {fileID: 6032893230368363108, guid: eaa5777b658f73c4c88f9d93777d522a, type: 3}
+  - {fileID: 2822802281093401338, guid: f149dbb3afbbe754a97e038d6eb7a895, type: 3}
+  - {fileID: 3139369172403112472, guid: 562c9e6cd016851419b8bbf1fba7aca1, type: 3}
+  - {fileID: 8260701529940941472, guid: 765e3c811c1751d478e0c841fcfd45fe, type: 3}
+  - {fileID: 5283985311628231034, guid: dd7abd21fbc50b84dad8191c04e5ee81, type: 3}
   _spawnPositionList:
   - {fileID: 1963696392}
   - {fileID: 861402152}
@@ -708,7 +716,7 @@ Transform:
   m_GameObject: {fileID: 861402150}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4, y: 0, z: -3}
+  m_LocalPosition: {x: 3.5, y: 0, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -796,7 +804,7 @@ Transform:
   m_GameObject: {fileID: 1474330797}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8, y: 0, z: -3}
+  m_LocalPosition: {x: 7, y: 0, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -863,7 +871,8 @@ MonoBehaviour:
   _width: 8
   _height: 8
   _cellScale: 0.95
-  _offsetY: 0.5
+  _cellScaleY: 0.1
+  _offsetY: 0
   _testColors:
   - {r: 0.75164366, g: 1, b: 0.2999999, a: 1}
   - {r: 0, g: 1, b: 0.56094694, a: 1}
@@ -1035,7 +1044,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rayDistance: 100
-  _offsetY: 0.5
   _groundLayer:
     serializedVersion: 2
     m_Bits: 256

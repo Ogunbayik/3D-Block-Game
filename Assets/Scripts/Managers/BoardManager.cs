@@ -12,7 +12,7 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private int _width;
     [SerializeField] private int _height;
     [SerializeField] private float _cellScale;
-    [SerializeField] private float _offsetY;
+    [SerializeField] private float _cellScaleY;
     [Space]
     [Header("Test Settings")]
     [SerializeField] private Color[] _testColors;
@@ -38,7 +38,7 @@ public class BoardManager : MonoBehaviour
                 var spawnPosition = new Vector3(x, 0f, z);
 
                 cell.SetCellColor(GetRandomColor());
-                cell.SetCellScale(new Vector3(_cellScale, _cellScale, _cellScale));
+                cell.SetCellScale(new Vector3(_cellScale, _cellScaleY, _cellScale));
 
                 cellObj.name = $"Cell[{x},{z}]";
                 cellObj.transform.position = spawnPosition;
@@ -90,7 +90,7 @@ public class BoardManager : MonoBehaviour
 
             targetNode.PlaceBlock(child.gameObject);
 
-            child.position = new Vector3(position.x, _offsetY, position.y);
+            child.position = new Vector3(position.x, 0f, position.y);
 
             child.GetComponent<BlockItem>().SetNode(targetNode);
             child.SetParent(targetNode.CellTransform);

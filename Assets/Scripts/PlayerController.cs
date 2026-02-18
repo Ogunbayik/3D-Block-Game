@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("Raycast Settings")]
     [SerializeField] private float _rayDistance;
-    [SerializeField] private float _offsetY;
     [Header("Layer Settings")]
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private LayerMask _draggableLayer;
