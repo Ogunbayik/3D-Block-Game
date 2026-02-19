@@ -473,7 +473,7 @@ MonoBehaviour:
   - {fileID: 3139369172403112472, guid: 562c9e6cd016851419b8bbf1fba7aca1, type: 3}
   - {fileID: 8260701529940941472, guid: 765e3c811c1751d478e0c841fcfd45fe, type: 3}
   - {fileID: 5283985311628231034, guid: dd7abd21fbc50b84dad8191c04e5ee81, type: 3}
-  _spawnSlotList:
+  _spawnSlots:
   - {fileID: 1963696392}
   - {fileID: 861402152}
   - {fileID: 1474330799}

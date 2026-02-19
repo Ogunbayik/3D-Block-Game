@@ -114,7 +114,6 @@ public class BoardManager : MonoBehaviour
 
         return true;
     }
-   
     private void ProcessMatches()
     {
         //Yatay objeler eklendi.
