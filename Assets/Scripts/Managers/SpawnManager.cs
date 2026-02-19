@@ -10,14 +10,17 @@ public class SpawnManager : MonoBehaviour
 
     private List<Shape> _activeShapes = new List<Shape>();
 
-    [Header("Spawn Settings")]
-    [SerializeField] private GameObject[] _blockPrefabs;
+    [Header("Initial Spawn Settings")]
+    [SerializeField] private GameObject[] _initialShapePrefabs;
+    [Header("General Spawn Settings")]
+    [SerializeField] private GameObject[] _randomShapePrefabs;
     [SerializeField] private List<SpawnSlot> _spawnSlotList = new List<SpawnSlot>();
 
     private int _rotationCount = 4;
 
     public Func<bool> OnAllShapesPlaced;
     public List<Shape> ActiveShapes => _activeShapes;
+    
     [Inject]
     public void Construct(SignalBus signalBus) => _signalBus = signalBus;
 
@@ -29,17 +32,16 @@ public class SpawnManager : MonoBehaviour
     {
         _signalBus.Unsubscribe<GameSignal.OnShapePlaced>(RemoveShape);
     }
-    private void Start()
+    private void Start() => Initialize();
+    private void Initialize()
     {
-        SpawnRandomBlock();
-
         OnAllShapesPlaced = () => _spawnSlotList.TrueForAll(shape => shape.IsPlaced);
     }
+
     public void RemoveShape(GameSignal.OnShapePlaced signal) => _activeShapes.Remove(signal.Shape.GetComponent<Shape>());
     public void CheckAndSpawnNewShapes()
     {
-        if (OnAllShapesPlaced())
-            SpawnRandomBlock();
+        SpawnRandomBlock();
     }
     private void SpawnRandomBlock()
     {
@@ -56,7 +58,10 @@ public class SpawnManager : MonoBehaviour
             SpawnSlot spawnSlot = _spawnSlotList[i].GetComponent<SpawnSlot>();
             spawnSlot.AssingnShape(shape);
         }
+
+        _signalBus.Fire(new GameSignal.OnSpawnedNewBlocks());
     }
+
     private Quaternion GetRandomRotation()
     {
         float index = UnityEngine.Random.Range(0, _rotationCount);
@@ -67,10 +72,10 @@ public class SpawnManager : MonoBehaviour
     }
     private GameObject GetRandomShape()
     {
-        var randomIndex = UnityEngine.Random.Range(0, _blockPrefabs.Length);
-        var randomBlock = _blockPrefabs[randomIndex];
+        var randomIndex = UnityEngine.Random.Range(0, _randomShapePrefabs.Length);
+        var randomShape = _randomShapePrefabs[randomIndex];
 
-        return randomBlock;
+        return randomShape;
     }
 
 }

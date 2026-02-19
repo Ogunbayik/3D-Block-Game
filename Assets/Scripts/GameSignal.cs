@@ -9,7 +9,18 @@ public static class GameSignal
         public GameObject Shape;
         public OnShapePlaced(GameObject shape) => Shape = shape;
     }
+    public class OnMatchesFound 
+    {
+        public int RowMatchCount;
+        public int ColMatchCount;
+
+        public OnMatchesFound(int rowMatchCount, int colMatchCount)
+        {
+            RowMatchCount = rowMatchCount;
+            ColMatchCount = colMatchCount;
+        }
+    }
     public class OnSlotCleared { }
-    public class OnMatchesFound { }
+    public class OnSpawnedNewBlocks { }
 
 }

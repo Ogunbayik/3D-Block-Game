@@ -52,8 +52,16 @@ public class BoardManager : MonoBehaviour
             }
         }
     }
-    private void OnEnable() => _signalBus.Subscribe<GameSignal.OnShapePlaced>(ProcessMatches);
-    private void OnDisable() => _signalBus.Unsubscribe<GameSignal.OnShapePlaced>(ProcessMatches);
+    private void OnEnable()
+    {
+        _signalBus.Subscribe<GameSignal.OnShapePlaced>(ProcessMatches);
+        _signalBus.Subscribe<GameSignal.OnSpawnedNewBlocks>(CheckGameOver);
+    }
+    private void OnDisable()
+    {
+        _signalBus.Unsubscribe<GameSignal.OnShapePlaced>(ProcessMatches);
+        _signalBus.Unsubscribe<GameSignal.OnSpawnedNewBlocks>(CheckGameOver);
+    }
     //TEST PART
     private Color GetRandomColor()
     {
@@ -116,9 +124,12 @@ public class BoardManager : MonoBehaviour
 
         if (_matchHash.Count > 0)
         {
-            RemoveBlocks(_matchHash);
+            var rowMatchCount = GetFullRowIndices().Count;
+            var colMatchCount = GetFullColIndices().Count;
 
-            _signalBus.Fire(new GameSignal.OnMatchesFound());
+            _signalBus.Fire(new GameSignal.OnMatchesFound(rowMatchCount,colMatchCount));
+
+            RemoveBlocks(_matchHash);
 
             _matchHash.Clear();
         }
@@ -193,7 +204,10 @@ public class BoardManager : MonoBehaviour
             for (int z = 0; z < _height; z++)
             {
                 if (TryFitAt(blockOffsets, x, z))
+                {
+                    Debug.Log($"StartPosition X:{x}, Z: {z}");
                     return true;
+                }
             }
         }
         return false;

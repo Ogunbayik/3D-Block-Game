@@ -455,7 +455,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6223b7ef8f427646a7e4b3e24ccaf5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _blockPrefabs:
+  _initialShapePrefabs:
+  - {fileID: 2822802281093401338, guid: f149dbb3afbbe754a97e038d6eb7a895, type: 3}
+  - {fileID: 6032893230368363108, guid: eaa5777b658f73c4c88f9d93777d522a, type: 3}
+  - {fileID: 3794565749876584063, guid: 9ac9db0e0a84c124e9a4e5b07ec72a72, type: 3}
+  - {fileID: 3139369172403112472, guid: 562c9e6cd016851419b8bbf1fba7aca1, type: 3}
+  - {fileID: 5283985311628231034, guid: dd7abd21fbc50b84dad8191c04e5ee81, type: 3}
+  - {fileID: 3131866835065319354, guid: d4ec36d5b3602a643a706c7d6a8e404f, type: 3}
+  _randomShapePrefabs:
   - {fileID: 3131866835065319354, guid: d4ec36d5b3602a643a706c7d6a8e404f, type: 3}
   - {fileID: 731968435243491709, guid: 3876b4fbd6a9a174ea4945b59e1e51c9, type: 3}
   - {fileID: 3794565749876584063, guid: 9ac9db0e0a84c124e9a4e5b07ec72a72, type: 3}
@@ -572,6 +579,52 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 1, z: 3}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &687067442
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 687067444}
+  - component: {fileID: 687067443}
+  m_Layer: 0
+  m_Name: ScoreManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &687067443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 687067442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 521f7347c28b7994c85bd14c56c9e9b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _passScore: 500
+  _blockScore: 5
+--- !u!4 &687067444
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 687067442}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1058,8 +1111,9 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 2101827219}
   - {fileID: 483859206}
-  - {fileID: 1570057545}
-  - {fileID: 458058561}
   - {fileID: 391043183}
   - {fileID: 1886165285}
   - {fileID: 692860570}
+  - {fileID: 458058561}
+  - {fileID: 1570057545}
+  - {fileID: 687067444}
