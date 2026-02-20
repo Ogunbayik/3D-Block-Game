@@ -25,6 +25,9 @@ public class ScoreManager : MonoBehaviour
     {
         var score = CalculateTotalScore(signal.RowMatchCount, signal.ColMatchCount);
         IncreaseScore(score);
+
+        if (IsPassedLevel())
+            _signalBus.Fire(new GameSignal.OnGameLevelPassed());
     }
 
     private int CalculateTotalScore(int rowMatchCount, int colMatchCount)

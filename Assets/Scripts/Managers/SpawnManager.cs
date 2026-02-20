@@ -51,8 +51,14 @@ public class SpawnManager : MonoBehaviour
 
         HandleSpawnBlocks();
     }
+    public void RemoveShape(GameSignal.OnShapePlaced signal)
+    {
+        _activeShapes.Remove(signal.Shape.GetComponent<Shape>());
 
-    public void RemoveShape(GameSignal.OnShapePlaced signal) => _activeShapes.Remove(signal.Shape.GetComponent<Shape>());
+        if (_activeShapes.Count == 0)
+            _signalBus.Fire(new GameSignal.OnAllShapePlaced());
+
+    }
     public void CheckAndSpawnNewShapes()
     {
         if (OnAllShapesPlaced())

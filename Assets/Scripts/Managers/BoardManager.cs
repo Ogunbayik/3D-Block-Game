@@ -30,7 +30,7 @@ public class BoardManager : MonoBehaviour
         _signalBus = signalBus;
         _spawnManager = spawnManager;
     }
-    void Start() => SetupBoard();
+    private void Awake() => SetupBoard();        
     private void SetupBoard()
     {
         _allNodes = new Node[_width, _height];
@@ -55,11 +55,13 @@ public class BoardManager : MonoBehaviour
     private void OnEnable()
     {
         _signalBus.Subscribe<GameSignal.OnShapePlaced>(ProcessMatches);
+        _signalBus.Subscribe<GameSignal.OnAllShapePlaced>(CheckGameOver);
         _signalBus.Subscribe<GameSignal.OnSpawnedNewBlocks>(CheckGameOver);
     }
     private void OnDisable()
     {
         _signalBus.Unsubscribe<GameSignal.OnShapePlaced>(ProcessMatches);
+        _signalBus.Unsubscribe<GameSignal.OnAllShapePlaced>(CheckGameOver);
         _signalBus.Unsubscribe<GameSignal.OnSpawnedNewBlocks>(CheckGameOver);
     }
     //TEST PART
@@ -94,7 +96,8 @@ public class BoardManager : MonoBehaviour
             return false;
 
         List<Transform> shapeChildren = new List<Transform>();
-        foreach (Transform shapeChild in shapeObj.transform) shapeChildren.Add(shapeChild);
+        foreach (Transform shapeChild in shapeObj.transform)
+            shapeChildren.Add(shapeChild);
 
         foreach (var child in shapeChildren)
         {
@@ -135,15 +138,15 @@ public class BoardManager : MonoBehaviour
 
         CheckGameOver();
     }
-    private void CollectVerticalMatch()
+    private void CollectHorizontalMatch()
     {
-        var fullColIndices = GetFullColIndices();
+        var fullRowIndices = GetFullRowIndices();
 
-        foreach (var colIndex in fullColIndices)
+        foreach (var rowIndex in fullRowIndices)
         {
-            for (int z = 0; z < _height; z++)
+            for (int x = 0; x < _width; x++)
             {
-                var block = _allNodes[colIndex, z].StoredBlockObject;
+                var block = _allNodes[x, rowIndex].StoredBlockObject;
 
                 if (block != null)
                 {
@@ -155,15 +158,15 @@ public class BoardManager : MonoBehaviour
             }
         }
     }
-    private void CollectHorizontalMatch()
+    private void CollectVerticalMatch()
     {
-        var fullRowIndices = GetFullRowIndices();
+        var fullColIndices = GetFullColIndices();
 
-        foreach (var rowIndex in fullRowIndices)
+        foreach (var colIndex in fullColIndices)
         {
-            for (int x = 0; x < _width; x++)
+            for (int z = 0; z < _height; z++)
             {
-                var block = _allNodes[x, rowIndex].StoredBlockObject;
+                var block = _allNodes[colIndex, z].StoredBlockObject;
 
                 if (block != null)
                 {
@@ -238,6 +241,8 @@ public class BoardManager : MonoBehaviour
 
             if (blockItem != null && blockItem.CurrentNode != null)
                 blockItem.CurrentNode.Clear();
+            else
+                Debug.LogError($"DÝKKAT! Node temizlenemedi! BlockItem null mu? {blockItem == null} | CurrentNode null mu? {(blockItem != null ? blockItem.CurrentNode == null : "Bilinmiyor")}");
 
             Destroy(block);
         }

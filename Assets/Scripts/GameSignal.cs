@@ -22,5 +22,7 @@ public static class GameSignal
     }
     public class OnSlotCleared { }
     public class OnSpawnedNewBlocks { }
+    public class OnAllShapePlaced { }
+    public class OnGameLevelPassed { }
 
 }
