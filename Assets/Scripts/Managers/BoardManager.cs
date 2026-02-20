@@ -7,6 +7,7 @@ public class BoardManager : MonoBehaviour
     private SignalBus _signalBus;
 
     private SpawnManager _spawnManager;
+    private LevelManager _levelManager;
 
     [Header("Visual References")]
     [SerializeField] private GameObject _cubePrefab;
@@ -25,12 +26,48 @@ public class BoardManager : MonoBehaviour
     private Node[,] _allNodes;
 
     [Inject]
-    public void Construct(SignalBus signalBus, SpawnManager spawnManager)
+    public void Construct(SignalBus signalBus, SpawnManager spawnManager,LevelManager levelManager)
     {
         _signalBus = signalBus;
         _spawnManager = spawnManager;
+        _levelManager = levelManager;
     }
-    private void Awake() => SetupBoard();        
+    
+    private void OnEnable()
+    {
+        _signalBus.Subscribe<GameSignal.OnShapePlaced>(ProcessMatches);
+        _signalBus.Subscribe<GameSignal.OnAllShapePlaced>(CheckGameOver);
+        _signalBus.Subscribe<GameSignal.OnSpawnedNewBlocks>(CheckGameOver);
+        _signalBus.Subscribe<GameSignal.OnGameStateChanged>(HandleGameStateChanged);
+    }
+    private void OnDisable()
+    {
+        _signalBus.Unsubscribe<GameSignal.OnShapePlaced>(ProcessMatches);
+        _signalBus.Unsubscribe<GameSignal.OnAllShapePlaced>(CheckGameOver);
+        _signalBus.Unsubscribe<GameSignal.OnSpawnedNewBlocks>(CheckGameOver);
+        _signalBus.Unsubscribe<GameSignal.OnGameStateChanged>(HandleGameStateChanged);
+    }
+    private void HandleGameStateChanged(GameSignal.OnGameStateChanged signal)
+    {
+        switch(signal.NewState)
+        {
+            case GameState.Playing: HandleGameStart();
+                break;
+            case GameState.GameOver: HandleGameOver();
+                break;
+        }
+    }
+    private void HandleGameStart()
+    {
+        SetupBoard();
+        SetupLevel();
+
+        _signalBus.Fire(new GameSignal.OnBoardGenerated());
+    }
+    private void HandleGameOver()
+    {
+        //TODO Board Daðýlma animasyonu eklenecek
+    }
     private void SetupBoard()
     {
         _allNodes = new Node[_width, _height];
@@ -52,17 +89,21 @@ public class BoardManager : MonoBehaviour
             }
         }
     }
-    private void OnEnable()
+    private void SetupLevel()
     {
-        _signalBus.Subscribe<GameSignal.OnShapePlaced>(ProcessMatches);
-        _signalBus.Subscribe<GameSignal.OnAllShapePlaced>(CheckGameOver);
-        _signalBus.Subscribe<GameSignal.OnSpawnedNewBlocks>(CheckGameOver);
-    }
-    private void OnDisable()
-    {
-        _signalBus.Unsubscribe<GameSignal.OnShapePlaced>(ProcessMatches);
-        _signalBus.Unsubscribe<GameSignal.OnAllShapePlaced>(CheckGameOver);
-        _signalBus.Unsubscribe<GameSignal.OnSpawnedNewBlocks>(CheckGameOver);
+        var currentLevel = _levelManager.CurrentLevel;
+
+        foreach (var shape in currentLevel.StartingShapes)
+        {
+            GameObject shapeInstance = Instantiate(shape.ShapePrefab);
+           
+            shapeInstance.transform.position = new Vector3(shape.StartCoordinate.x, 0f, shape.StartCoordinate.y);
+            shapeInstance.transform.rotation = GetRotationFromEnum(shape.Rotation);
+
+            TryPlaceShape(shapeInstance);
+
+            _allNodes[shape.StartCoordinate.x, shape.StartCoordinate.y].PlaceBlock(shapeInstance);
+        }
     }
     //TEST PART
     private Color GetRandomColor()
@@ -193,11 +234,8 @@ public class BoardManager : MonoBehaviour
             }
         }
 
-        //TODO Gameover signal 
-        if (canMove)
-            Debug.Log("Still Play");
-        else
-            Debug.Log("Game over");
+        if (!canMove)
+            _signalBus.Fire(new GameSignal.OnGameOver());
     }
     public bool HasValidPlacement(List<Vector2Int> blockOffsets)
     {
@@ -216,6 +254,8 @@ public class BoardManager : MonoBehaviour
     }
     private bool TryFitAt(List<Vector2Int> blockOffsets, int startX, int startZ)
     {
+        Debug.Log(blockOffsets.Count.ToString());
+
         foreach (Vector2Int offset in blockOffsets)
         {
             int targetX = startX + offset.x;
@@ -300,5 +340,20 @@ public class BoardManager : MonoBehaviour
         int y = Mathf.RoundToInt(worldPosition.z);
 
         return new Vector2Int(x, y);
+    }
+    public Quaternion GetRotationFromEnum(ShapeRotation rotationEnum)
+    {
+        switch (rotationEnum)
+        {
+            case ShapeRotation.Deg90:
+                return Quaternion.Euler(0f, 90f, 0f);
+            case ShapeRotation.Deg180:
+                return Quaternion.Euler(0f, 180f, 0f);
+            case ShapeRotation.Deg270:
+                return Quaternion.Euler(0f, 270f, 0f);
+            case ShapeRotation.Deg0:
+            default:
+                return Quaternion.identity;
+        }
     }
 }

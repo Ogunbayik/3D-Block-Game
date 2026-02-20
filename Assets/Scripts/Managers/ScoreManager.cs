@@ -8,9 +8,9 @@ public class ScoreManager : MonoBehaviour
 {
     private SignalBus _signalBus;
 
+    private LevelManager _levelManager;
 
     [Header("Score Settings")]
-    [SerializeField] private int _passScore;
     [SerializeField] private int _blockScore;
 
     private int _currentScore = 0;
@@ -18,7 +18,11 @@ public class ScoreManager : MonoBehaviour
     public int CurrentScore => _currentScore;
 
     [Inject]
-    public void Construct(SignalBus signalBus) => _signalBus = signalBus;
+    public void Construct(SignalBus signalBus,LevelManager levelManager)
+    {
+        _signalBus = signalBus;
+        _levelManager = levelManager;
+    }
     private void OnEnable() => _signalBus.Subscribe<GameSignal.OnMatchesFound>(HandleAddScore);
     private void OnDisable() => _signalBus.Unsubscribe<GameSignal.OnMatchesFound>(HandleAddScore);
     private void HandleAddScore(GameSignal.OnMatchesFound signal)
@@ -51,5 +55,5 @@ public class ScoreManager : MonoBehaviour
     }
 
     private void IncreaseScore(int score) => _currentScore += score;
-    private bool IsPassedLevel() => _currentScore >= _passScore;
+    private bool IsPassedLevel() => _currentScore >= _levelManager.CurrentLevel.PassScore;
 }

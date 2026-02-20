@@ -29,16 +29,21 @@ public class SpawnManager : MonoBehaviour
     private void OnEnable()
     {
         _signalBus.Subscribe<GameSignal.OnShapePlaced>(RemoveShape);
+        _signalBus.Subscribe<GameSignal.OnBoardGenerated>(InitialSpawn);
     }
     private void OnDisable()
     {
         _signalBus.Unsubscribe<GameSignal.OnShapePlaced>(RemoveShape);
+        _signalBus.Unsubscribe<GameSignal.OnBoardGenerated>(InitialSpawn);
     }
     private void Start() => Initialize();
     private void Initialize()
     {
+        AddQueueToInitial();
         OnAllShapesPlaced = () => _spawnSlots.TrueForAll(shape => shape.IsPlaced);
-
+    }
+    private void AddQueueToInitial()
+    {
         if (_initialShapePrefabs.Length % _spawnSlots.Count != 0)
         {
             throw new System.InvalidOperationException(
@@ -48,7 +53,9 @@ public class SpawnManager : MonoBehaviour
 
         for (int i = 0; i < _initialShapePrefabs.Length; i++)
             _initialShapeQueue.Enqueue(_initialShapePrefabs[i]);
-
+    }
+    private void InitialSpawn()
+    {
         HandleSpawnBlocks();
     }
     public void RemoveShape(GameSignal.OnShapePlaced signal)
@@ -104,16 +111,28 @@ public class SpawnManager : MonoBehaviour
                 spawnList.Add(shape);
             }
         }
-
         return spawnList;
     }
     private Quaternion GetRandomRotation()
     {
-        float index = UnityEngine.Random.Range(0, _rotationCount);
-        float degree = GameConstant.GameSetting.ROUND_ANGLE / _rotationCount;
+        ShapeRotation randomEnum = (ShapeRotation)UnityEngine.Random.Range(0, _rotationCount);
 
-        Quaternion rotation = Quaternion.Euler(0f, degree * index, 0f);
-        return rotation;
+        return GetRotationFromEnum(randomEnum);
+    }
+    public Quaternion GetRotationFromEnum(ShapeRotation rotationEnum)
+    {
+        switch (rotationEnum)
+        {
+            case ShapeRotation.Deg90: 
+                return Quaternion.Euler(0f, 90f, 0f);
+            case ShapeRotation.Deg180: 
+                return Quaternion.Euler(0f, 180f, 0f);
+            case ShapeRotation.Deg270: 
+                return Quaternion.Euler(0f, 270f, 0f);
+            case ShapeRotation.Deg0:
+            default: 
+                return Quaternion.identity;
+        }
     }
     private GameObject GetRandomShape()
     {
@@ -122,5 +141,11 @@ public class SpawnManager : MonoBehaviour
 
         return randomShape;
     }
-
+}
+public enum ShapeRotation
+{
+    Deg0 = 0,
+    Deg90 = 1,
+    Deg180 = 2,
+    Deg270 = 3
 }

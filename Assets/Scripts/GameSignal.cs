@@ -23,6 +23,12 @@ public static class GameSignal
     public class OnSlotCleared { }
     public class OnSpawnedNewBlocks { }
     public class OnAllShapePlaced { }
+    public class OnGameOver { }
     public class OnGameLevelPassed { }
-
+    public class OnGameStateChanged
+    {
+        public GameState NewState;
+        public OnGameStateChanged(GameState newState)  => NewState = newState;
+    }
+    public class OnBoardGenerated { }
 }

@@ -11,13 +11,20 @@ public class SignalInstaller : MonoInstaller
         Container.DeclareSignal<GameSignal.OnShapePlaced>();
         Container.DeclareSignal<GameSignal.OnAllShapePlaced>();
 
+        //Game Settings Signals
+        Container.DeclareSignal<GameSignal.OnGameLevelPassed>();
+        Container.DeclareSignal<GameSignal.OnGameStateChanged>();
+        Container.DeclareSignal<GameSignal.OnGameOver>();
+        Container.DeclareSignal<GameSignal.OnBoardGenerated>();
+
         Container.DeclareSignal<GameSignal.OnSlotCleared>();
         Container.DeclareSignal<GameSignal.OnMatchesFound>();
         Container.DeclareSignal<GameSignal.OnSpawnedNewBlocks>();
-        Container.DeclareSignal<GameSignal.OnGameLevelPassed>();
 
         Container.BindSignal<GameSignal.OnSlotCleared>()
             .ToMethod<SpawnManager>((x) => x.CheckAndSpawnNewShapes)
             .FromResolve();
+
+
     }
 }

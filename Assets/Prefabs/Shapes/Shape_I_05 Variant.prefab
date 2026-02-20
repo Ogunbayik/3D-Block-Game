@@ -13,6 +13,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlockItem_1
       objectReference: {fileID: 0}
+    - target: {fileID: 1187507766268420145, guid: 68bea265df955a74f8214f6b9d95131c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1559827326681959321, guid: 68bea265df955a74f8214f6b9d95131c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -170,6 +175,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlockItem_2
       objectReference: {fileID: 0}
+    - target: {fileID: 1007945047961792865, guid: 000aa22aa7ca35941b40b09f9ffcc0ee,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8147250322322985836, guid: 000aa22aa7ca35941b40b09f9ffcc0ee,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -243,6 +253,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BlockItem_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007945047961792865, guid: 000aa22aa7ca35941b40b09f9ffcc0ee,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8147250322322985836, guid: 000aa22aa7ca35941b40b09f9ffcc0ee,
         type: 3}
@@ -318,6 +333,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlockItem_4
       objectReference: {fileID: 0}
+    - target: {fileID: 1007945047961792865, guid: 000aa22aa7ca35941b40b09f9ffcc0ee,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8147250322322985836, guid: 000aa22aa7ca35941b40b09f9ffcc0ee,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -391,6 +411,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BlockItem_5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007945047961792865, guid: 000aa22aa7ca35941b40b09f9ffcc0ee,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8147250322322985836, guid: 000aa22aa7ca35941b40b09f9ffcc0ee,
         type: 3}
