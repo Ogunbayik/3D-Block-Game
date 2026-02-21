@@ -9,6 +9,8 @@ public class LevelDataSO : ScriptableObject
     public List<PrePlacedShapeData> StartingShapes;
     [Header("Level Settings")]
     public int ID;
+    public int Width;
+    public int Height;
     public int PassScore;
 }
 

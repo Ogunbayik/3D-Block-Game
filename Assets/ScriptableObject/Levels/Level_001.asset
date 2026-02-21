@@ -12,25 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b593398b1f7008a488abe7c62e6f1959, type: 3}
   m_Name: Level_001
   m_EditorClassIdentifier: 
-  StartingShapes:
-  - ShapePrefab: {fileID: 3794565749876584063, guid: 9ac9db0e0a84c124e9a4e5b07ec72a72,
-      type: 3}
-    StartCoordinate: {x: 2, y: 7}
-    Rotation: 1
-  - ShapePrefab: {fileID: 3794565749876584063, guid: 9ac9db0e0a84c124e9a4e5b07ec72a72,
-      type: 3}
-    StartCoordinate: {x: 2, y: 1}
-    Rotation: 1
-  - ShapePrefab: {fileID: 3794565749876584063, guid: 9ac9db0e0a84c124e9a4e5b07ec72a72,
-      type: 3}
-    StartCoordinate: {x: 1, y: 2}
-    Rotation: 0
-  - ShapePrefab: {fileID: 3131866835065319354, guid: d4ec36d5b3602a643a706c7d6a8e404f,
-      type: 3}
-    StartCoordinate: {x: 7, y: 2}
-    Rotation: 0
-  - ShapePrefab: {fileID: 3131866835065319354, guid: d4ec36d5b3602a643a706c7d6a8e404f,
-      type: 3}
-    StartCoordinate: {x: 4, y: 4}
-    Rotation: 1
-  PassScore: 50
+  StartingShapes: []
+  ID: 0
+  Width: 8
+  Height: 8
+  PassScore: 100

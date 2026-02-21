@@ -31,7 +31,7 @@ public class ScoreManager : MonoBehaviour
         IncreaseScore(score);
 
         if (IsPassedLevel())
-            _signalBus.Fire(new GameSignal.OnGameLevelPassed());
+            _signalBus.Fire(new GameSignal.OnGameStateChanged(GameState.GamePass));
     }
 
     private int CalculateTotalScore(int rowMatchCount, int colMatchCount)

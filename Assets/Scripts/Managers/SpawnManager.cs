@@ -8,7 +8,9 @@ public class SpawnManager : MonoBehaviour
 {
     private SignalBus _signalBus;
 
-    private List<Shape> _activeShapes = new List<Shape>();
+    private BaseShape.Pool _shapePool;
+
+    private List<BaseShape> _activeShapes = new List<BaseShape>();
 
     private Queue<GameObject> _initialShapeQueue = new Queue<GameObject>();
 
@@ -21,19 +23,25 @@ public class SpawnManager : MonoBehaviour
     private int _rotationCount = 4;
 
     public Func<bool> OnAllShapesPlaced;
-    public List<Shape> ActiveShapes => _activeShapes;
+    public List<BaseShape> ActiveShapes => _activeShapes;
+
+    [SerializeField] private ShapeData _testData;
 
     [Inject]
-    public void Construct(SignalBus signalBus) => _signalBus = signalBus;
+    public void Construct(SignalBus signalBus,BaseShape.Pool shapePool)
+    {
+        _signalBus = signalBus;
+        _shapePool = shapePool;
+    }
 
     private void OnEnable()
     {
-        _signalBus.Subscribe<GameSignal.OnShapePlaced>(RemoveShape);
+        _signalBus.Subscribe<GameSignal.OnShapePlaced>(HandleRemoveShape);
         _signalBus.Subscribe<GameSignal.OnBoardGenerated>(InitialSpawn);
     }
     private void OnDisable()
     {
-        _signalBus.Unsubscribe<GameSignal.OnShapePlaced>(RemoveShape);
+        _signalBus.Unsubscribe<GameSignal.OnShapePlaced>(HandleRemoveShape);
         _signalBus.Unsubscribe<GameSignal.OnBoardGenerated>(InitialSpawn);
     }
     private void Start() => Initialize();
@@ -58,13 +66,12 @@ public class SpawnManager : MonoBehaviour
     {
         HandleSpawnBlocks();
     }
-    public void RemoveShape(GameSignal.OnShapePlaced signal)
+    public void HandleRemoveShape(GameSignal.OnShapePlaced signal)
     {
-        _activeShapes.Remove(signal.Shape.GetComponent<Shape>());
+        ActiveShapes.Remove(signal.Shape);
 
-        if (_activeShapes.Count == 0)
+        if (ActiveShapes.Count == 0)
             _signalBus.Fire(new GameSignal.OnAllShapePlaced());
-
     }
     public void CheckAndSpawnNewShapes()
     {
@@ -73,44 +80,37 @@ public class SpawnManager : MonoBehaviour
     }
     private void HandleSpawnBlocks()
     {
-        var spawnList = GetSpawnList();
+        var spawnShapeData = GetSpawnShapeData();
 
         for (int i = 0; i < _spawnSlots.Count; i++)
         {
-            var shape = Instantiate(spawnList[i], _spawnSlots[i].transform);
-            var shapeScript = shape.GetComponent<Shape>();
-
-            shape.transform.localPosition = Vector3.zero;
-            shape.transform.rotation = GetRandomRotation();
-            _activeShapes.Add(shapeScript);
+            var shape = _shapePool.Spawn(_shapePool);
+            shape.Setup(spawnShapeData[i]);
+            shape.transform.position = _spawnSlots[i].transform.position;
+            _activeShapes.Add(shape);
 
             _spawnSlots[i].AssingnShape(shape);
         }
 
         _signalBus.Fire(new GameSignal.OnSpawnedNewBlocks());
     }
-    private List<GameObject> GetSpawnList()
+    private List<ShapeData> GetSpawnShapeData()
     {
-        var spawnList = new List<GameObject>();
+        var spawnList = new List<ShapeData>();
 
-        if (_initialShapeQueue.Count > 0)
+        if(_initialShapeQueue.Count > 0)
         {
-            for (int i = 0; i < _spawnSlots.Count; i++)
-            {
-                var shape = _initialShapeQueue.Dequeue();
-                spawnList.Add(shape);
-            }
-            Debug.Log($"Initial List: {_initialShapeQueue.Count}");
+            //Initial datalarý alýp onlarý oluþturacaðýz
         }
         else
         {
-            Debug.Log("Random Spawn ediyoruz.");
+            //Random datayý alýp onlarý oluþturacaðýz.
             for (int i = 0; i < _spawnSlots.Count; i++)
             {
-                var shape = GetRandomShape();
-                spawnList.Add(shape);
+                spawnList.Add(_testData);
             }
         }
+
         return spawnList;
     }
     private Quaternion GetRandomRotation()
@@ -133,13 +133,6 @@ public class SpawnManager : MonoBehaviour
             default: 
                 return Quaternion.identity;
         }
-    }
-    private GameObject GetRandomShape()
-    {
-        var randomIndex = UnityEngine.Random.Range(0, _randomShapePrefabs.Length);
-        var randomShape = _randomShapePrefabs[randomIndex];
-
-        return randomShape;
     }
 }
 public enum ShapeRotation

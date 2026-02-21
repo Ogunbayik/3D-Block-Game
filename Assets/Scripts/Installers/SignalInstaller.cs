@@ -12,9 +12,7 @@ public class SignalInstaller : MonoInstaller
         Container.DeclareSignal<GameSignal.OnAllShapePlaced>();
 
         //Game Settings Signals
-        Container.DeclareSignal<GameSignal.OnGameLevelPassed>();
         Container.DeclareSignal<GameSignal.OnGameStateChanged>();
-        Container.DeclareSignal<GameSignal.OnGameOver>();
         Container.DeclareSignal<GameSignal.OnBoardGenerated>();
 
         Container.DeclareSignal<GameSignal.OnSlotCleared>();

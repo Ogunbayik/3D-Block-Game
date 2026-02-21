@@ -6,6 +6,8 @@ public class BoardManager : MonoBehaviour
 {
     private SignalBus _signalBus;
 
+    private GridNode.Factory _gridNodeFactory;
+
     private SpawnManager _spawnManager;
     private LevelManager _levelManager;
 
@@ -14,25 +16,24 @@ public class BoardManager : MonoBehaviour
     [Header("Board Settings")]
     [SerializeField] private int _width;
     [SerializeField] private int _height;
-    [SerializeField] private float _cellScale;
-    [SerializeField] private float _cellScaleY;
+    [SerializeField] private float _gridScale;
+    [SerializeField] private float _gridScaleY;
     [Space]
     [Header("Test Settings")]
     [SerializeField] private Color[] _testColors;
 
-    private HashSet<GameObject> _matchHash = new HashSet<GameObject>();
-    private List<GameObject> _testList = new List<GameObject>();
+    private HashSet<GridNode> _gridNodeHash = new HashSet<GridNode>();
 
-    private Node[,] _allNodes;
+    private GridNode[,] _allGridNodes;
 
     [Inject]
-    public void Construct(SignalBus signalBus, SpawnManager spawnManager,LevelManager levelManager)
+    public void Construct(GridNode.Factory gridNodeFactory,SignalBus signalBus, SpawnManager spawnManager,LevelManager levelManager)
     {
+        _gridNodeFactory = gridNodeFactory;
         _signalBus = signalBus;
         _spawnManager = spawnManager;
         _levelManager = levelManager;
     }
-    
     private void OnEnable()
     {
         _signalBus.Subscribe<GameSignal.OnShapePlaced>(ProcessMatches);
@@ -59,8 +60,8 @@ public class BoardManager : MonoBehaviour
     }
     private void HandleGameStart()
     {
-        SetupBoard();
-        SetupLevel();
+        GeneratedBoard();
+        //SetupLevel();
 
         _signalBus.Fire(new GameSignal.OnBoardGenerated());
     }
@@ -68,27 +69,28 @@ public class BoardManager : MonoBehaviour
     {
         //TODO Board Daðýlma animasyonu eklenecek
     }
-    private void SetupBoard()
+    private void GeneratedBoard()
     {
-        _allNodes = new Node[_width, _height];
+        var currentLevel = _levelManager.CurrentLevel;
 
-        for (int x = 0; x < _width; x++)
+        _allGridNodes = new GridNode[currentLevel.Width, currentLevel.Height];
+
+        for (int x = 0; x < currentLevel.Width; x++)
         {
-            for (int z = 0; z < _height; z++)
+            for (int z = 0; z < currentLevel.Height; z++)
             {
-                var cellObj = Instantiate(_cubePrefab);
-                var cell = cellObj.GetComponent<Cell>();
-                var spawnPosition = new Vector3(x, 0f, z);
+                var gridNode = _gridNodeFactory.Create();
+                var gridPosition = new Vector3(x, 0f, z);
+                var gridScale = new Vector3(_gridScale,_gridScaleY, _gridScale);
 
-                cell.SetCellColor(GetRandomColor());
-                cell.SetCellScale(new Vector3(_cellScale, _cellScaleY, _cellScale));
-
-                cellObj.name = $"Cell[{x},{z}]";
-                cellObj.transform.position = spawnPosition;
-                _allNodes[x, z] = new Node(cellObj.transform);
+                gridNode.transform.position = gridPosition;
+                gridNode.SetBaseScale(gridScale);
+                gridNode.name = $"Grid[{x},{z}]";
+                _allGridNodes[x,z] = gridNode;
             }
         }
     }
+    /*
     private void SetupLevel()
     {
         var currentLevel = _levelManager.CurrentLevel;
@@ -102,59 +104,43 @@ public class BoardManager : MonoBehaviour
 
             TryPlaceShape(shapeInstance);
 
-            _allNodes[shape.StartCoordinate.x, shape.StartCoordinate.y].PlaceBlock(shapeInstance);
+            _testAllNodes[shape.StartCoordinate.x, shape.StartCoordinate.y].PlaceBlock();
         }
     }
-    //TEST PART
-    private Color GetRandomColor()
+    */
+    public bool CheckIfShapeFits(BaseShape selectedShape)
     {
-        var randomIndex = Random.Range(0, _testColors.Length);
-        var randomColor = _testColors[randomIndex];
+        var currentLevel = _levelManager.CurrentLevel;
 
-        return randomColor;
-    }
-    public bool CheckIfShapeFits(GameObject block)
-    {
-        //Yerleþtirilebilecek obje kontrolü yapýyoruz.
-        foreach(Transform child in block.transform)
+        foreach (var block in selectedShape.ActiveBlocks)
         {
-            var childPosition = WorldToGridPosition(child.position);
+            var blockPosition = WorldToGridPosition(block.transform.position);
 
-            //Alanýn içerisinde mi
-            if (childPosition.x >= _width || childPosition.x < 0 || childPosition.y >= _height || childPosition.y < 0)
+            if (blockPosition.x >= currentLevel.Width || blockPosition.x < 0 || blockPosition.y >= currentLevel.Height || blockPosition.y < 0)
                 return false;
 
-            //Node'lar uygun mu
-            if (_allNodes[childPosition.x, childPosition.y].IsOccupied)
+            if (_allGridNodes[blockPosition.x, blockPosition.y].IsOccupied)
                 return false;
         }
 
         return true;
     }
-    public bool TryPlaceShape(GameObject shapeObj)
+    public bool TryPlaceShape(BaseShape selectedShape)
     {
-        if (!CheckIfShapeFits(shapeObj))
+        if (!CheckIfShapeFits(selectedShape))
             return false;
 
-        List<Transform> shapeChildren = new List<Transform>();
-        foreach (Transform shapeChild in shapeObj.transform)
-            shapeChildren.Add(shapeChild);
+        var shapeBlocks = selectedShape.ActiveBlocks;
 
-        foreach (var child in shapeChildren)
+        foreach (var block in shapeBlocks)
         {
-            var position = WorldToGridPosition(child.position);
-            Node targetNode = _allNodes[position.x, position.y];
+            var blockPosition = WorldToGridPosition(block.transform.position);
+            GridNode targetNode = _allGridNodes[blockPosition.x, blockPosition.y];
 
-            targetNode.PlaceBlock(child.gameObject);
-
-            child.position = new Vector3(position.x, 0f, position.y);
-
-            child.GetComponent<BlockItem>().SetNode(targetNode);
-            child.SetParent(targetNode.CellTransform);
-            child.gameObject.layer = LayerMask.NameToLayer("Placed");
+            targetNode.PlaceBlock();
         }
 
-        Destroy(shapeObj);
+        selectedShape.ReturnToPool();
 
         return true;
     }
@@ -165,16 +151,16 @@ public class BoardManager : MonoBehaviour
         //Dikey objeler eklendi.
         CollectVerticalMatch();
 
-        if (_matchHash.Count > 0)
+        if (_gridNodeHash.Count > 0)
         {
             var rowMatchCount = GetFullRowIndices().Count;
             var colMatchCount = GetFullColIndices().Count;
 
             _signalBus.Fire(new GameSignal.OnMatchesFound(rowMatchCount,colMatchCount));
 
-            RemoveBlocks(_matchHash);
+            RemoveBlocks(_gridNodeHash);
 
-            _matchHash.Clear();
+            _gridNodeHash.Clear();
         }
 
         CheckGameOver();
@@ -182,40 +168,32 @@ public class BoardManager : MonoBehaviour
     private void CollectHorizontalMatch()
     {
         var fullRowIndices = GetFullRowIndices();
+        var currentLevel = _levelManager.CurrentLevel;
 
         foreach (var rowIndex in fullRowIndices)
         {
-            for (int x = 0; x < _width; x++)
+            for (int x = 0; x < currentLevel.Width; x++)
             {
-                var block = _allNodes[x, rowIndex].StoredBlockObject;
+                var gridNode = _allGridNodes[x, rowIndex];
 
-                if (block != null)
-                {
-                    _matchHash.Add(block);
-
-                    if (!_testList.Contains(block))
-                        _testList.Add(block);
-                }
+                if (gridNode != null)
+                    _gridNodeHash.Add(gridNode);
             }
         }
     }
     private void CollectVerticalMatch()
     {
         var fullColIndices = GetFullColIndices();
+        var currentLevel = _levelManager.CurrentLevel;
 
         foreach (var colIndex in fullColIndices)
         {
-            for (int z = 0; z < _height; z++)
+            for (int z = 0; z < currentLevel.Height; z++)
             {
-                var block = _allNodes[colIndex, z].StoredBlockObject;
+                var gridNode = _allGridNodes[colIndex, z];
 
-                if (block != null)
-                {
-                    _matchHash.Add(block);
-
-                    if (!_testList.Contains(block))
-                        _testList.Add(block);
-                }
+                if (gridNode != null)
+                    _gridNodeHash.Add(gridNode);
             }
         }
     }
@@ -227,7 +205,7 @@ public class BoardManager : MonoBehaviour
         bool canMove = false;
         foreach (var shape in currentShapes)
         {
-            if (HasValidPlacement(shape.BlockOffsets))
+            if (HasValidPlacement(shape.Data.BlockCoordinates))
             {
                 canMove = true;
                 break;
@@ -235,13 +213,14 @@ public class BoardManager : MonoBehaviour
         }
 
         if (!canMove)
-            _signalBus.Fire(new GameSignal.OnGameOver());
+            _signalBus.Fire(new GameSignal.OnGameStateChanged(GameState.GameOver));
     }
     public bool HasValidPlacement(List<Vector2Int> blockOffsets)
     {
-        for (int x = 0; x < _width; x++)
+        var currentLevel = _levelManager.CurrentLevel;
+        for (int x = 0; x < currentLevel.Width; x++)
         {
-            for (int z = 0; z < _height; z++)
+            for (int z = 0; z < currentLevel.Height; z++)
             {
                 if (TryFitAt(blockOffsets, x, z))
                 {
@@ -254,50 +233,40 @@ public class BoardManager : MonoBehaviour
     }
     private bool TryFitAt(List<Vector2Int> blockOffsets, int startX, int startZ)
     {
-        Debug.Log(blockOffsets.Count.ToString());
+        var currentLevel = _levelManager.CurrentLevel;
 
         foreach (Vector2Int offset in blockOffsets)
         {
             int targetX = startX + offset.x;
             int targetZ = startZ + offset.y;
 
-            if (targetX >= _width || targetZ >= _height || targetX < 0 || targetZ < 0)
+            if (targetX >= currentLevel.Width || targetZ >= currentLevel.Height || targetX < 0 || targetZ < 0)
                 return false;
 
-            if (_allNodes[targetX, targetZ].IsOccupied)
+            if (_allGridNodes[targetX, targetZ].IsOccupied)
                 return false;
         }
         return true;
     }
-    private void RemoveBlocks(HashSet<GameObject> blocksToDestroy)
+    private void RemoveBlocks(HashSet<GridNode> gridToMatch)
     {
-        //TODO Blocklardaki animasyonu çalýþtýrýp, Daha sonra Destroy etmek lazým
-        foreach (var block in blocksToDestroy)
+        foreach(var gridNode in gridToMatch)
         {
-            if (block == null)
-                continue;
-
-            BlockItem blockItem = block.GetComponent<BlockItem>();
-
-            if (blockItem != null && blockItem.CurrentNode != null)
-                blockItem.CurrentNode.Clear();
-            else
-                Debug.LogError($"DÝKKAT! Node temizlenemedi! BlockItem null mu? {blockItem == null} | CurrentNode null mu? {(blockItem != null ? blockItem.CurrentNode == null : "Bilinmiyor")}");
-
-            Destroy(block);
+            gridNode.Clear();
         }
     }
     private List<int> GetFullRowIndices()
     {
         List<int> fullRowIndices = new List<int>();
+        var currentLevel = _levelManager.CurrentLevel;
 
-        for (int z = 0; z < _height; z++)
+        for (int z = 0; z < currentLevel.Height; z++)
         {
             bool isRowMatch = true;
 
-            for (int x = 0; x < _width; x++)
+            for (int x = 0; x < currentLevel.Width; x++)
             {
-                if (!_allNodes[x,z].IsOccupied)
+                if (!_allGridNodes[x,z].IsOccupied)
                 {
                     isRowMatch = false;
                     break;
@@ -313,14 +282,15 @@ public class BoardManager : MonoBehaviour
     private List<int> GetFullColIndices()
     {
         List<int> fullColIndices = new List<int>();
+        var currentLevel = _levelManager.CurrentLevel;
 
-        for (int x = 0; x < _width; x++)
+        for (int x = 0; x < currentLevel.Width; x++)
         {
             bool isColMatch = true;
 
-            for (int z = 0; z < _height; z++)
+            for (int z = 0; z < currentLevel.Height; z++)
             {
-                if (!_allNodes[x, z].IsOccupied)
+                if (!_allGridNodes[x, z].IsOccupied)
                 {
                     isColMatch = false;
                     break;
@@ -337,9 +307,9 @@ public class BoardManager : MonoBehaviour
     {
         //Deðerleri yuvarlýyoruz.
         int x = Mathf.RoundToInt(worldPosition.x);
-        int y = Mathf.RoundToInt(worldPosition.z);
+        int z = Mathf.RoundToInt(worldPosition.z);
 
-        return new Vector2Int(x, y);
+        return new Vector2Int(x, z);
     }
     public Quaternion GetRotationFromEnum(ShapeRotation rotationEnum)
     {

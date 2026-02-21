@@ -8,8 +8,8 @@ public class SpawnSlot : MonoBehaviour
 {
     private SignalBus _signalBus;
 
-    private GameObject _currentShape;
-    public GameObject CurrentShape => _currentShape;
+    private BaseShape _currentShape;
+    public BaseShape CurrentShape => _currentShape;
 
     [Inject]
     public void Construct(SignalBus signalBus) => _signalBus = signalBus;
@@ -23,6 +23,6 @@ public class SpawnSlot : MonoBehaviour
         _signalBus.Fire(new GameSignal.OnSlotCleared());
     }
     public bool IsPlaced => _currentShape == null;
-    public void AssingnShape(GameObject shape) => _currentShape = shape;
+    public void AssingnShape(BaseShape shape) => _currentShape = shape;
     public void Clear() => _currentShape = null;
 }

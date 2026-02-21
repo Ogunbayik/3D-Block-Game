@@ -15,9 +15,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _rayDistance;
     [Header("Layer Settings")]
     [SerializeField] private LayerMask _groundLayer;
-    [SerializeField] private LayerMask _draggableLayer;
 
-    private GameObject _selectedShape;
+    private BaseShape _selectedShape;
 
     private Vector3 _offset;
     private Vector3 _selectPosition;
@@ -35,31 +34,38 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
-            HandleSelectBlock();
+            HandleSelectShape();
 
         if (Input.GetMouseButton(0) && _selectedShape != null)
-            HandleDragBlock();
+            HandleDragShape();
 
         if (Input.GetMouseButtonUp(0) && _selectedShape != null)
-            HandleReleaseBlock();
+            HandleReleaseShape();
     }
-    private void HandleSelectBlock()
+    private void HandleSelectShape()
     {
         var mousePosition = Input.mousePosition;
         var ray = _mainCamera.ScreenPointToRay(mousePosition);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, _rayDistance, _draggableLayer))
+        if (Physics.Raycast(ray, out RaycastHit hit, _rayDistance))
         {
-            _selectedShape = hit.collider.gameObject;
-            _selectPosition = _selectedShape.transform.position;
+            BaseShape touchedShape = hit.collider.GetComponentInParent<BaseShape>();
 
-            if (Physics.Raycast(ray, out RaycastHit groundHit, _rayDistance, _groundLayer))
+            if (touchedShape != null)
             {
-                _offset = _selectedShape.transform.position - groundHit.point;
+                _selectedShape = touchedShape;
+                _selectPosition = _selectedShape.transform.position;
+
+                if (Physics.Raycast(ray, out RaycastHit groundHit, _rayDistance, _groundLayer))
+                {
+                    _offset = _selectedShape.transform.position - groundHit.point;
+                }
             }
+            else
+                _selectedShape = null;
         }
     }
-    private void HandleDragBlock()
+    private void HandleDragShape()
     {
         var mousePosition = Input.mousePosition;
         var ray = _mainCamera.ScreenPointToRay(mousePosition);
@@ -70,7 +76,7 @@ public class PlayerController : MonoBehaviour
             _selectedShape.transform.position = targetPosition;
         }
     }
-    private void HandleReleaseBlock()
+    private void HandleReleaseShape()
     {
         if (!_boardManager.TryPlaceShape(_selectedShape))
         {
@@ -83,9 +89,6 @@ public class PlayerController : MonoBehaviour
 
         _signalBus.Fire(new GameSignal.OnShapePlaced(_selectedShape));
 
-        Debug.Log($"{_selectedShape.name} yerleþtirildi.");
-        _selectedShape.layer = LayerMask.NameToLayer("Placed");
         _selectedShape = null;
     }
-
 }

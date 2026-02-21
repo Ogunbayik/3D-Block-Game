@@ -6,8 +6,8 @@ public static class GameSignal
 {
     public class OnShapePlaced
     {
-        public GameObject Shape;
-        public OnShapePlaced(GameObject shape) => Shape = shape;
+        public BaseShape Shape;
+        public OnShapePlaced(BaseShape shape) => Shape = shape;
     }
     public class OnMatchesFound 
     {
@@ -23,8 +23,6 @@ public static class GameSignal
     public class OnSlotCleared { }
     public class OnSpawnedNewBlocks { }
     public class OnAllShapePlaced { }
-    public class OnGameOver { }
-    public class OnGameLevelPassed { }
     public class OnGameStateChanged
     {
         public GameState NewState;
