@@ -13,7 +13,6 @@ public class SignalInstaller : MonoInstaller
 
         //Game Settings Signals
         Container.DeclareSignal<GameSignal.OnGameStateChanged>();
-        Container.DeclareSignal<GameSignal.OnBoardGenerated>();
 
         Container.DeclareSignal<GameSignal.OnSlotCleared>();
         Container.DeclareSignal<GameSignal.OnMatchesFound>();

@@ -34,42 +34,11 @@ public class BoardManager : MonoBehaviour
         _spawnManager = spawnManager;
         _levelManager = levelManager;
     }
-    private void OnEnable()
-    {
-        _signalBus.Subscribe<GameSignal.OnShapePlaced>(ProcessMatches);
-        _signalBus.Subscribe<GameSignal.OnAllShapePlaced>(CheckGameOver);
-        _signalBus.Subscribe<GameSignal.OnSpawnedNewBlocks>(CheckGameOver);
-        _signalBus.Subscribe<GameSignal.OnGameStateChanged>(HandleGameStateChanged);
-    }
-    private void OnDisable()
-    {
-        _signalBus.Unsubscribe<GameSignal.OnShapePlaced>(ProcessMatches);
-        _signalBus.Unsubscribe<GameSignal.OnAllShapePlaced>(CheckGameOver);
-        _signalBus.Unsubscribe<GameSignal.OnSpawnedNewBlocks>(CheckGameOver);
-        _signalBus.Unsubscribe<GameSignal.OnGameStateChanged>(HandleGameStateChanged);
-    }
-    private void HandleGameStateChanged(GameSignal.OnGameStateChanged signal)
-    {
-        switch(signal.NewState)
-        {
-            case GameState.Playing: HandleGameStart();
-                break;
-            case GameState.GameOver: HandleGameOver();
-                break;
-        }
-    }
-    private void HandleGameStart()
-    {
-        GeneratedBoard();
-        //SetupLevel();
-
-        _signalBus.Fire(new GameSignal.OnBoardGenerated());
-    }
     private void HandleGameOver()
     {
         //TODO Board Daðýlma animasyonu eklenecek
     }
-    private void GeneratedBoard()
+    public void GeneratedBoard()
     {
         var currentLevel = _levelManager.CurrentLevel;
 
@@ -90,24 +59,40 @@ public class BoardManager : MonoBehaviour
             }
         }
     }
-    /*
-    private void SetupLevel()
+    public void SetupLevel()
     {
         var currentLevel = _levelManager.CurrentLevel;
 
-        foreach (var shape in currentLevel.StartingShapes)
+        foreach (var startingShape in currentLevel.StartingShapes)
         {
-            GameObject shapeInstance = Instantiate(shape.ShapePrefab);
-           
-            shapeInstance.transform.position = new Vector3(shape.StartCoordinate.x, 0f, shape.StartCoordinate.y);
-            shapeInstance.transform.rotation = GetRotationFromEnum(shape.Rotation);
-
-            TryPlaceShape(shapeInstance);
-
-            _testAllNodes[shape.StartCoordinate.x, shape.StartCoordinate.y].PlaceBlock();
+            PlaceInitialShape(startingShape.ShapeData, startingShape.StartCoordinate);
         }
     }
-    */
+    public void PlaceInitialShape(ShapeData shapeData, Vector2Int startCoordinate)
+    {
+        // ShapeData'nýn içindeki orijinal (0,0), (1,0) gibi yerel koordinatlarý dönüyoruz
+        foreach (Vector2Int offset in shapeData.BlockCoordinates)
+        {
+            // Baþlangýç noktamýzýn üzerine bu offset'leri ekleyip gerçek hücreyi buluyoruz
+            int targetX = startCoordinate.x + offset.x;
+            int targetZ = startCoordinate.y + offset.y; // Sende y yerine z kullanýlmýþ olabilir
+
+            // Güvenlik Duvarý: Þekil tahtanýn dýþýna taþýyor mu?
+            if (targetX >= 0 && targetX < _width && targetZ >= 0 && targetZ < _height)
+            {
+                GridNode targetNode = _allGridNodes[targetX, targetZ];
+
+                // Eðer o hücre zaten dolu deðilse, bloðu yerleþtir!
+                if (!targetNode.IsOccupied)
+                {
+                    targetNode.PlaceBlock();
+
+                    // Ýsteðe baðlý: Eðer hücreye ShapeData'nýn rengini veya "Bu bir engeldir" 
+                    // bilgisini vermek istersen burada targetNode.SetVisual(shapeData.Color) diyebilirsin.
+                }
+            }
+        }
+    }
     public bool CheckIfShapeFits(BaseShape selectedShape)
     {
         var currentLevel = _levelManager.CurrentLevel;
@@ -144,7 +129,7 @@ public class BoardManager : MonoBehaviour
 
         return true;
     }
-    private void ProcessMatches()
+    public void ProcessMatches()
     {
         //Yatay objeler eklendi.
         CollectHorizontalMatch();
@@ -162,8 +147,6 @@ public class BoardManager : MonoBehaviour
 
             _gridNodeHash.Clear();
         }
-
-        CheckGameOver();
     }
     private void CollectHorizontalMatch()
     {
@@ -213,7 +196,10 @@ public class BoardManager : MonoBehaviour
         }
 
         if (!canMove)
+        {
+            Debug.Log("Dont any move");
             _signalBus.Fire(new GameSignal.OnGameStateChanged(GameState.GameOver));
+        }
     }
     public bool HasValidPlacement(List<Vector2Int> blockOffsets)
     {
@@ -310,20 +296,5 @@ public class BoardManager : MonoBehaviour
         int z = Mathf.RoundToInt(worldPosition.z);
 
         return new Vector2Int(x, z);
-    }
-    public Quaternion GetRotationFromEnum(ShapeRotation rotationEnum)
-    {
-        switch (rotationEnum)
-        {
-            case ShapeRotation.Deg90:
-                return Quaternion.Euler(0f, 90f, 0f);
-            case ShapeRotation.Deg180:
-                return Quaternion.Euler(0f, 180f, 0f);
-            case ShapeRotation.Deg270:
-                return Quaternion.Euler(0f, 270f, 0f);
-            case ShapeRotation.Deg0:
-            default:
-                return Quaternion.identity;
-        }
     }
 }

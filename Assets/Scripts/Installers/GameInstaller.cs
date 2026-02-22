@@ -20,6 +20,7 @@ public class GameInstaller : MonoInstaller
         Container.Bind<BoardManager>().FromInstance(_boardManager).AsSingle();
         Container.Bind<LevelManager>().FromInstance(_levelManager).AsSingle();
         Container.Bind<GameManager>().FromInstance(_gameManager).AsSingle();
+        Container.BindInterfacesAndSelfTo<GameFlowManager>().AsSingle().NonLazy();
 
         Container.BindFactory<GridNode, GridNode.Factory>()
            .FromComponentInNewPrefab(_testGridNode)

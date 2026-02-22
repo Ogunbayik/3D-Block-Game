@@ -17,9 +17,7 @@ public class LevelDataSO : ScriptableObject
 [System.Serializable]
 public struct PrePlacedShapeData
 {
-    public GameObject ShapePrefab;
+    public ShapeData ShapeData;
     public Vector2Int StartCoordinate;
-
-    public ShapeRotation Rotation;
 
 }

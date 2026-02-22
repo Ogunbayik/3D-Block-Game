@@ -28,5 +28,4 @@ public static class GameSignal
         public GameState NewState;
         public OnGameStateChanged(GameState newState)  => NewState = newState;
     }
-    public class OnBoardGenerated { }
 }

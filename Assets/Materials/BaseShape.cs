@@ -22,9 +22,9 @@ public class BaseShape : MonoBehaviour, IPoolable<IMemoryPool>
     {
 
     }
-
     public void ReturnToPool()
     {
+        _activeBlocks.Clear();
         _pool.Despawn(this);
     }
     public void Setup(ShapeData data)
