@@ -9,17 +9,33 @@ public class SignalInstaller : MonoInstaller
 
         //Block Place Events
         Container.DeclareSignal<GameSignal.OnShapePlaced>();
-        Container.DeclareSignal<GameSignal.OnAllShapePlaced>();
-
         //Game Settings Signals
         Container.DeclareSignal<GameSignal.OnGameStateChanged>();
-
-        Container.DeclareSignal<GameSignal.OnSlotCleared>();
+        //Match Singals
         Container.DeclareSignal<GameSignal.OnMatchesFound>();
-        Container.DeclareSignal<GameSignal.OnSpawnedNewBlocks>();
+        
+        //UI Button Signals
+        Container.DeclareSignal<GameSignal.OnClickPlayButton>();
+        Container.DeclareSignal<GameSignal.OnClickBackButton>();
+        Container.DeclareSignal<GameSignal.OnClickLevelButton>();
+        Container.DeclareSignal<GameSignal.OnClickExitButton>();
+        //TODO Exit button için application quit yazýlacak.
 
-        Container.BindSignal<GameSignal.OnSlotCleared>()
-            .ToMethod<SpawnManager>((x) => x.CheckAndSpawnNewShapes)
+
+        Container.BindSignal<GameSignal.OnClickPlayButton>()
+            .ToMethod<UIManager>(x => x.HandleClickedPlayButton)
+            .FromResolve();
+
+        Container.BindSignal<GameSignal.OnClickBackButton>()
+            .ToMethod<UIManager>(x => x.HandleClickedBackButton)
+            .FromResolve();
+
+        Container.BindSignal<GameSignal.OnClickExitButton>()
+            .ToMethod<UIManager>(x => x.HandleClickedExitButton)
+            .FromResolve();
+
+        Container.BindSignal<GameSignal.OnClickLevelButton>()
+            .ToMethod<LevelManager>((x) => x.OnLevelChanged)
             .FromResolve();
 
 

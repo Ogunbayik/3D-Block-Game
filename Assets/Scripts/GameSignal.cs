@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public static class GameSignal
 {
@@ -20,12 +21,20 @@ public static class GameSignal
             ColMatchCount = colMatchCount;
         }
     }
-    public class OnSlotCleared { }
-    public class OnSpawnedNewBlocks { }
-    public class OnAllShapePlaced { }
     public class OnGameStateChanged
     {
         public GameState NewState;
         public OnGameStateChanged(GameState newState)  => NewState = newState;
     }
+
+    //Butonlar için signaller
+    public class OnClickLevelButton
+    {
+        public LevelButton LevelButton;
+        public OnClickLevelButton(LevelButton levelButton) { LevelButton = levelButton; }
+    }
+    public class OnClickPlayButton { }
+    public class OnClickExitButton { }
+    public class OnClickBackButton { }
+
 }

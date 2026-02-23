@@ -54,8 +54,6 @@ public class SpawnManager : MonoBehaviour
             newShape.transform.position = _spawnPositions[i].position;
             _activeShapes.Add(newShape);
         }
-
-        _signalBus.Fire(new GameSignal.OnSpawnedNewBlocks());
     }
     private List<ShapeData> GetSpawnShapeData()
     {
