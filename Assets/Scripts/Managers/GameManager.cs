@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 public enum GameState
 {
     MainMenu,
+    Prepare,
     Playing,
     GameOver,
     GamePass

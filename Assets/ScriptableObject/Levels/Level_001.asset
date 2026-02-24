@@ -15,7 +15,7 @@ MonoBehaviour:
   StartingShapes:
   - ShapeData: {fileID: 11400000, guid: 00e3310e1edf99948aa327e1db470c18, type: 2}
     StartCoordinate: {x: 2, y: 2}
-  ID: 2
+  ID: 1
   Width: 8
   Height: 8
   PassScore: 100

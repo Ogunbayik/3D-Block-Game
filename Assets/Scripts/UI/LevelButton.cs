@@ -24,13 +24,12 @@ public class LevelButton : MonoBehaviour
     public void Construct(SignalBus signalBus) => _signalBus = signalBus;
     private void Awake() => SetLevelText(_levelID);
     private void Start() => _levelButton.onClick.AddListener(() => HandleClickButton());
-
     private void HandleClickButton()
     {
         if (_isLocked)
         {
             //TODO Level için titreme efekti eklenecek.. (Image olarak kilit iþareti ile ayarlama yapýlabilir)
-            Debug.Log($"Level {_levelID} is locked! Try others..");
+            Debug.Log($"Level {_levelID} is locked! You can not enter this level..");
         }
         else
         {
@@ -39,7 +38,6 @@ public class LevelButton : MonoBehaviour
             _signalBus.Fire(new GameSignal.OnClickLevelButton(this));
         }
     }
-        
     private void SetLevelText(int ID) => _levelText.text = $"Level {ID}";
     public void SetLockedStatus(bool isActive) => _isLocked = isActive;
     public int LevelID => _levelID;

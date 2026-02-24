@@ -3,56 +3,52 @@
   "WorkspaceRootPath": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|c:\\users\\ogun\\unityprojects\\3d-block-game\\assets\\scripts\\ui\\gamemenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ui\\gamemenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\assets\\scripts\\ui\\levelbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ui\\levelbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\assets\\scripts\\ui\\levelselectmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ui\\levelselectmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\assets\\scripts\\managers\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\managers\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\assets\\scripts\\scriptableobject\\leveldataso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\scriptableobject\\leveldataso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|c:\\users\\ogun\\unityprojects\\3d-block-game\\assets\\scripts\\managers\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\managers\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\assets\\scripts\\managers\\levelmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\managers\\levelmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\assets\\scripts\\managers\\gameflowmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\managers\\gameflowmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\assets\\scripts\\managers\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\managers\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\assets\\scripts\\ui\\levelbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ui\\levelbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|c:\\users\\ogun\\unityprojects\\3d-block-game\\assets\\scripts\\ui\\levelselectmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ui\\levelselectmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\assets\\scripts\\gamesignal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gamesignal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\assets\\scripts\\installers\\gameinstaller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\installers\\gameinstaller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\assets\\scripts\\installers\\signalinstaller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\installers\\signalinstaller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\assets\\scripts\\managers\\spawnmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\managers\\spawnmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\assets\\scripts\\managers\\boardmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\managers\\boardmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\assets\\scripts\\ui\\gamemenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ui\\gamemenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\assets\\materials\\baseshape.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|solutionrelative:assets\\materials\\baseshape.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\assets\\scripts\\installers\\signalinstaller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\installers\\signalinstaller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\assets\\scripts\\managers\\gameflowmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\managers\\gameflowmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\assets\\scripts\\installers\\gameinstaller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\installers\\gameinstaller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\assets\\scripts\\scriptableobject\\leveldataso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\scriptableobject\\leveldataso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DFA5FDA6-CAD6-E36B-FB18-672D447A41A0}|Assembly-CSharp.csproj|C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\assets\\scripts\\gridnode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -78,55 +74,59 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "LevelSelectMenu.cs",
-              "DocumentMoniker": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\UI\\LevelSelectMenu.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\LevelSelectMenu.cs",
-              "ToolTip": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\UI\\LevelSelectMenu.cs",
-              "RelativeToolTip": "Assets\\Scripts\\UI\\LevelSelectMenu.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAvwBMAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-23T11:23:11.129Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "LevelManager.cs",
               "DocumentMoniker": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\Managers\\LevelManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Managers\\LevelManager.cs",
               "ToolTip": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\Managers\\LevelManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\Managers\\LevelManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAAowCUAAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-20T12:37:28.617Z"
+              "WhenOpened": "2026-02-20T12:37:28.617Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GameManager.cs",
+              "DocumentMoniker": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\Managers\\GameManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Managers\\GameManager.cs",
+              "ToolTip": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\Managers\\GameManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Managers\\GameManager.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAxwBoAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-24T10:51:25.972Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "LevelSelectMenu.cs",
+              "DocumentMoniker": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\UI\\LevelSelectMenu.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\LevelSelectMenu.cs",
+              "ToolTip": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\UI\\LevelSelectMenu.cs",
+              "RelativeToolTip": "Assets\\Scripts\\UI\\LevelSelectMenu.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAAwBoAAABjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-23T11:23:11.129Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "LevelDataSO.cs",
-              "DocumentMoniker": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\ScriptableObject\\LevelDataSO.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\ScriptableObject\\LevelDataSO.cs",
-              "ToolTip": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\ScriptableObject\\LevelDataSO.cs",
-              "RelativeToolTip": "Assets\\Scripts\\ScriptableObject\\LevelDataSO.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAA2wBQAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-20T12:14:55.201Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "LevelButton.cs",
               "DocumentMoniker": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\UI\\LevelButton.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\LevelButton.cs",
               "ToolTip": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\UI\\LevelButton.cs",
               "RelativeToolTip": "Assets\\Scripts\\UI\\LevelButton.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAA+wBIAAABQAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAABkAAABYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-23T11:24:38.357Z"
+              "WhenOpened": "2026-02-23T11:24:38.357Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -136,13 +136,14 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\Managers\\UIManager.cs",
               "ToolTip": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\Managers\\UIManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\Managers\\UIManager.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAzwB0AAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAswCEAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-23T09:35:06.15Z"
+              "WhenOpened": "2026-02-23T09:35:06.15Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 8,
               "Title": "GameMenu.cs",
               "DocumentMoniker": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\UI\\GameMenu.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\GameMenu.cs",
@@ -161,13 +162,14 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\GameSignal.cs",
               "ToolTip": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\GameSignal.cs",
               "RelativeToolTip": "Assets\\Scripts\\GameSignal.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAIwCIAAABCAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAUwBoAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-16T18:08:28.877Z"
+              "WhenOpened": "2026-02-16T18:08:28.877Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 7,
               "Title": "SpawnManager.cs",
               "DocumentMoniker": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\Managers\\SpawnManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Managers\\SpawnManager.cs",
@@ -175,71 +177,63 @@
               "RelativeToolTip": "Assets\\Scripts\\Managers\\SpawnManager.cs",
               "ViewState": "AgIAACsAAAAAAAAAAAAmwDcAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-18T13:46:34.355Z"
+              "WhenOpened": "2026-02-18T13:46:34.355Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "GameInstaller.cs",
-              "DocumentMoniker": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\Installers\\GameInstaller.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Installers\\GameInstaller.cs",
-              "ToolTip": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\Installers\\GameInstaller.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Installers\\GameInstaller.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAAwBcAAABSAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-20T12:41:39.63Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "BoardManager.cs",
-              "DocumentMoniker": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\Managers\\BoardManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Managers\\BoardManager.cs",
-              "ToolTip": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\Managers\\BoardManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Managers\\BoardManager.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAmwB0AAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-16T07:21:24.058Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "BaseShape.cs",
-              "DocumentMoniker": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Materials\\BaseShape.cs",
-              "RelativeDocumentMoniker": "Assets\\Materials\\BaseShape.cs",
-              "ToolTip": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Materials\\BaseShape.cs",
-              "RelativeToolTip": "Assets\\Materials\\BaseShape.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAUAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-21T12:39:39.245Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "SignalInstaller.cs",
               "DocumentMoniker": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\Installers\\SignalInstaller.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Installers\\SignalInstaller.cs",
               "ToolTip": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\Installers\\SignalInstaller.cs",
               "RelativeToolTip": "Assets\\Scripts\\Installers\\SignalInstaller.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAABAAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAAEwCYAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-16T18:05:48.914Z"
+              "WhenOpened": "2026-02-16T18:05:48.914Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 2,
               "Title": "GameFlowManager.cs",
               "DocumentMoniker": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\Managers\\GameFlowManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Managers\\GameFlowManager.cs",
               "ToolTip": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\Managers\\GameFlowManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\Managers\\GameFlowManager.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAArwDAAAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAACcAAAAAAAAAAAAvwD8AAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-22T13:01:50.905Z"
+              "WhenOpened": "2026-02-22T13:01:50.905Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 10,
+              "Title": "GameInstaller.cs",
+              "DocumentMoniker": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\Installers\\GameInstaller.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Installers\\GameInstaller.cs",
+              "ToolTip": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\Installers\\GameInstaller.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Installers\\GameInstaller.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwBcAAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-20T12:41:39.63Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "LevelDataSO.cs",
+              "DocumentMoniker": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\ScriptableObject\\LevelDataSO.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\ScriptableObject\\LevelDataSO.cs",
+              "ToolTip": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\ScriptableObject\\LevelDataSO.cs",
+              "RelativeToolTip": "Assets\\Scripts\\ScriptableObject\\LevelDataSO.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAUwBQAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-20T12:14:55.201Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "GridNode.cs",
               "DocumentMoniker": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\GridNode.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\GridNode.cs",
@@ -251,7 +245,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 13,
               "Title": "ShapeData.cs",
               "DocumentMoniker": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Materials\\ShapeData.cs",
               "RelativeDocumentMoniker": "Assets\\Materials\\ShapeData.cs",
@@ -263,7 +257,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 15,
               "Title": "Shape.cs",
               "DocumentMoniker": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\Shape.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Shape.cs",
@@ -275,7 +269,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 14,
               "Title": "ScoreManager.cs",
               "DocumentMoniker": "C:\\Users\\ogun\\UnityProjects\\3D-Block-Game\\Assets\\Scripts\\Managers\\ScoreManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Managers\\ScoreManager.cs",

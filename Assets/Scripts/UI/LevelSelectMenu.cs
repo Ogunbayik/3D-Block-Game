@@ -48,10 +48,4 @@ public class LevelSelectMenu : MonoBehaviour
             }
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
