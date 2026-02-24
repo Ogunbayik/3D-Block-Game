@@ -31,12 +31,28 @@ public class SpawnManager : MonoBehaviour
     private void Awake() => Initialize();
     private void Initialize()
     {
+        /*
         if(_initialShapeData.Count > 0)
         {
             foreach (var shapeData in _initialShapeData)
                 _initialShapeQueue.Enqueue(shapeData);
         }
+        */
     }
+    private void Test()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            var newShape = _shapePool.Spawn(_shapePool);
+            newShape.Setup(_shapeDatas[i]);
+            newShape.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
+            var offsetY = i / 3;
+            int mod3 = i % 3;
+
+            newShape.transform.position = new Vector3(mod3 * 3, 0f, offsetY * 3);
+        }
+    }
+    
     public void RemoveActiveShape(BaseShape shape) => _activeShapes.Remove(shape);
     public void CheckAndSpawnNewShapes()
     {
@@ -52,6 +68,7 @@ public class SpawnManager : MonoBehaviour
             var newShape = _shapePool.Spawn(_shapePool);
             newShape.Setup(spawnShapeData[i]);
             newShape.transform.position = _spawnPositions[i].position;
+            newShape.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
             _activeShapes.Add(newShape);
         }
     }

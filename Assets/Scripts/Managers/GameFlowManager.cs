@@ -25,7 +25,6 @@ public class GameFlowManager : IInitializable, IDisposable
         _spawnManager = spawnManager;
         _uiManager = uiManager;
     }
-
     public void Initialize()
     {
         _signalBus.Subscribe<GameSignal.OnGameStateChanged>(OnGamePrepareReceived);

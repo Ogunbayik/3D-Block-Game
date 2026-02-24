@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3801327896831344834}
   - component: {fileID: 7087961458344529409}
+  - component: {fileID: 8317603716340633161}
   m_Layer: 0
   m_Name: BaseShape
   m_TagString: Untagged
@@ -96,6 +97,27 @@ MonoBehaviour:
   - {fileID: 4900135114532333941}
   - {fileID: 4758830005305956426}
   _activeBlocks: []
+--- !u!114 &8317603716340633161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8155123417628146095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4907fd1b38d939a44838d9173554978c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _squashScale: {x: 1.2, y: 1, z: 0.8}
+  _stretchScale: {x: 0.9, y: 1, z: 1.1}
+  _squashDuration: 0.15
+  _stretchDuration: 0.15
+  _recoveryDuration: 0.3
+  _growthScale: {x: 1, y: 1, z: 1}
+  _growthDuration: 0.75
+  _shrinkageScale: {x: 0.75, y: 0.75, z: 0.75}
+  _shrinkageDuration: 0.75
 --- !u!1001 &276457037237147478
 PrefabInstance:
   m_ObjectHideFlags: 0

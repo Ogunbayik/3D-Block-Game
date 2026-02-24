@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, _rayDistance))
         {
             BaseShape touchedShape = hit.collider.GetComponentInParent<BaseShape>();
+            ShapeAnimationController shapeAnimationController = hit.collider.GetComponentInParent<ShapeAnimationController>();
 
             if (touchedShape != null)
             {
