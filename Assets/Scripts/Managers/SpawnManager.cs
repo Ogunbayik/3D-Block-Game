@@ -68,6 +68,7 @@ public class SpawnManager : MonoBehaviour
             var newShape = _shapePool.Spawn(_shapePool);
             newShape.Setup(spawnShapeData[i]);
             newShape.transform.position = _spawnPositions[i].position;
+            newShape.SetSpawnPosition(newShape.transform.position);
             newShape.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
             _activeShapes.Add(newShape);
         }

@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [Header("Raycast Settings")]
     [SerializeField] private float _rayDistance;
     [Header("Layer Settings")]
+    [SerializeField] private LayerMask _draggableLayer;
     [SerializeField] private LayerMask _groundLayer;
 
     private BaseShape _selectedShape;
@@ -47,15 +48,15 @@ public class PlayerController : MonoBehaviour
         var mousePosition = Input.mousePosition;
         var ray = _mainCamera.ScreenPointToRay(mousePosition);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, _rayDistance))
+        if (Physics.Raycast(ray, out RaycastHit hit, _rayDistance,_draggableLayer))
         {
             BaseShape touchedShape = hit.collider.GetComponentInParent<BaseShape>();
-            ShapeAnimationController shapeAnimationController = hit.collider.GetComponentInParent<ShapeAnimationController>();
 
             if (touchedShape != null)
             {
                 _selectedShape = touchedShape;
                 _selectPosition = _selectedShape.transform.position;
+                _selectedShape.Click();
 
                 if (Physics.Raycast(ray, out RaycastHit groundHit, _rayDistance, _groundLayer))
                 {
@@ -82,8 +83,7 @@ public class PlayerController : MonoBehaviour
         if (!_boardManager.TryPlaceShape(_selectedShape))
         {
             //TODO Go back to position with animation
-            _selectedShape.transform.position = _selectPosition;
-            _selectPosition = Vector3.zero;
+            _selectedShape.Released();
             _selectedShape = null;
             return;
         }

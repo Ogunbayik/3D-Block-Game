@@ -22,7 +22,8 @@ public class GridNode : MonoBehaviour
         _isOccupied = false;
         ToggleBlock(false);
     }
-    private void ToggleBlock(bool isActive) => _blockVisual.SetActive(isActive);
+    public void SetOccupied(bool isOccupied) => _isOccupied = isOccupied;
+    public void ToggleBlock(bool isActive) => _blockVisual.SetActive(isActive);
     public void SetBaseScale(Vector3 scale) => _baseVisual.transform.localScale = scale;
 
     public class Factory : PlaceholderFactory<GridNode> { }

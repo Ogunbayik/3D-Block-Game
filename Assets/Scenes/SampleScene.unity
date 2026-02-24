@@ -3047,6 +3047,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rayDistance: 100
+  _draggableLayer:
+    serializedVersion: 2
+    m_Bits: 64
   _groundLayer:
     serializedVersion: 2
     m_Bits: 256
