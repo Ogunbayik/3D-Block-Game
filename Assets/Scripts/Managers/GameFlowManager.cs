@@ -75,9 +75,13 @@ public class GameFlowManager : IInitializable, IDisposable
     }
     public async UniTask HandleTurnAsyn(GameSignal.OnShapePlaced signal)
     {
+        float jellyDuration = 0.6f;
+
         //SpawnManagerden objeyi sildik.
         _spawnManager.RemoveActiveShape(signal.Shape);
 
+        await UniTask.Delay(TimeSpan.FromSeconds(jellyDuration), cancellationToken:_cts.Token);
+        //Jelly animasyonu kadar bekledik ve kontrolleri yaptýk.
         _boardManager.ProcessMatches();
 
         //Eðer eþleþme varsa animasyon kadar bekleyecek

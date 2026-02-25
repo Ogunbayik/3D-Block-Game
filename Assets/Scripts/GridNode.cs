@@ -7,23 +7,18 @@ public class GridNode : MonoBehaviour
 {
     [Header("Visual References")]
     [SerializeField] private GameObject _baseVisual;
-    [SerializeField] private GameObject _blockVisual;
+    [SerializeField] private Block _block;
 
     private bool _isOccupied;
     public bool IsOccupied => _isOccupied;
     private void Awake() => ToggleBlock(false);
-    public void PlaceBlock()
-    {
-        _isOccupied = true;
-        ToggleBlock(true);
-    }
     public void Clear()
     {
         _isOccupied = false;
         ToggleBlock(false);
     }
-    public void SetOccupied(bool isOccupied) => _isOccupied = isOccupied;
-    public void ToggleBlock(bool isActive) => _blockVisual.SetActive(isActive);
+    public void SetOccupiedStatus(bool isActive) => _isOccupied = isActive;
+    public void ToggleBlock(bool isActive) => _block.gameObject.SetActive(isActive);
     public void SetBaseScale(Vector3 scale) => _baseVisual.transform.localScale = scale;
 
     public class Factory : PlaceholderFactory<GridNode> { }

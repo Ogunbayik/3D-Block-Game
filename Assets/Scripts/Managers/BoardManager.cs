@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -71,14 +72,11 @@ public class BoardManager : MonoBehaviour
     }
     public void PlaceInitialShape(ShapeData shapeData, Vector2Int startCoordinate)
     {
-        // ShapeData'nýn içindeki orijinal (0,0), (1,0) gibi yerel koordinatlarý dönüyoruz
         foreach (Vector2Int offset in shapeData.BlockCoordinates)
         {
-            // Baþlangýç noktamýzýn üzerine bu offset'leri ekleyip gerçek hücreyi buluyoruz
             int targetX = startCoordinate.x + offset.x;
-            int targetZ = startCoordinate.y + offset.y; // Sende y yerine z kullanýlmýþ olabilir
+            int targetZ = startCoordinate.y + offset.y;
 
-            // Güvenlik Duvarý: Þekil tahtanýn dýþýna taþýyor mu?
             if (targetX >= 0 && targetX < _width && targetZ >= 0 && targetZ < _height)
             {
                 GridNode targetNode = _allGridNodes[targetX, targetZ];
@@ -86,8 +84,8 @@ public class BoardManager : MonoBehaviour
                 // Eðer o hücre zaten dolu deðilse, bloðu yerleþtir!
                 if (!targetNode.IsOccupied)
                 {
-                    targetNode.PlaceBlock();
-
+                    targetNode.SetOccupiedStatus(true);
+                    targetNode.ToggleBlock(true);
                     // Ýsteðe baðlý: Eðer hücreye ShapeData'nýn rengini veya "Bu bir engeldir" 
                     // bilgisini vermek istersen burada targetNode.SetVisual(shapeData.Color) diyebilirsin.
                 }
@@ -116,19 +114,49 @@ public class BoardManager : MonoBehaviour
         if (!CheckIfShapeFits(selectedShape))
             return false;
 
-        var shapeBlocks = selectedShape.ActiveBlocks;
+        HandlePlaceSequence(selectedShape).Forget();
 
-        foreach (var block in shapeBlocks)
+        return true;
+    }
+    private async UniTask HandlePlaceSequence(BaseShape selectedShape)
+    {
+        float jellyDuration = 0.6f;
+        Sequence placeSequence = DOTween.Sequence();
+
+        //Ýlk olarak Node Occupied edilecek.
+        SetNodeOccupied(selectedShape, true);
+
+        var targetPosition = WorldToGridPosition(selectedShape.transform.position);
+        selectedShape.transform.position = new Vector3(targetPosition.x, 0f, targetPosition.y);
+
+        ShapeAnimationController shapeAnimation = selectedShape.GetComponent<ShapeAnimationController>();
+
+        placeSequence.AppendCallback(() => shapeAnimation.PlayJellySequence());
+        placeSequence.AppendInterval(jellyDuration);
+        placeSequence.AppendCallback(() => ToggleNodeBlock(selectedShape, true));
+        placeSequence.JoinCallback(() => selectedShape.ReturnToPool());
+    }
+    private void SetNodeOccupied(BaseShape selectedShape, bool isActive)
+    {
+        var shapeblocks = selectedShape.ActiveBlocks;
+        foreach (var block in shapeblocks)
         {
             var blockPosition = WorldToGridPosition(block.transform.position);
             GridNode targetNode = _allGridNodes[blockPosition.x, blockPosition.y];
 
-            targetNode.PlaceBlock();
+            targetNode.SetOccupiedStatus(isActive);
         }
+    }
+    private void ToggleNodeBlock(BaseShape selectedShape, bool isActive)
+    {
+        var shapeblocks = selectedShape.ActiveBlocks;
+        foreach (var block in shapeblocks)
+        {
+            var blockPosition = WorldToGridPosition(block.transform.position);
+            GridNode targetNode = _allGridNodes[blockPosition.x, blockPosition.y];
 
-        selectedShape.ReturnToPool();
-
-        return true;
+            targetNode.ToggleBlock(isActive);
+        }
     }
     public void ProcessMatches()
     {

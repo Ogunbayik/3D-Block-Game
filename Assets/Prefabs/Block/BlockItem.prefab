@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7218280116865758488}
   - component: {fileID: 6387055489468149163}
   - component: {fileID: 2855598484419114499}
+  - component: {fileID: 1730288206775691982}
   - component: {fileID: 7219393668261223545}
   m_Layer: 0
   m_Name: BlockItem
@@ -100,6 +101,23 @@ MonoBehaviour:
   _localX: 0
   _localY: 0
   _meshRenderer: {fileID: 6387055489468149163}
+--- !u!114 &1730288206775691982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007945047961792865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c045331a04dca2d41ad7ff6cdfc89aac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _squashScale: {x: 1.2, y: 1, z: 0.8}
+  _squashDuration: 0.2
+  _stretchScale: {x: 0.9, y: 1, z: 1.1}
+  _stretchDuration: 0.2
+  _recoveryDuration: 0.3
 --- !u!65 &7219393668261223545
 BoxCollider:
   m_ObjectHideFlags: 0
