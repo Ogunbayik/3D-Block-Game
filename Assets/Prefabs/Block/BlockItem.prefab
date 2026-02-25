@@ -113,11 +113,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c045331a04dca2d41ad7ff6cdfc89aac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _squashScale: {x: 1.2, y: 1, z: 0.8}
-  _squashDuration: 0.2
-  _stretchScale: {x: 0.9, y: 1, z: 1.1}
-  _stretchDuration: 0.2
-  _recoveryDuration: 0.3
+  _growthScale: {x: 1.2, y: 1, z: 1.2}
+  _growthDuration: 0.2
+  _dissolveDuration: 0.4
 --- !u!65 &7219393668261223545
 BoxCollider:
   m_ObjectHideFlags: 0

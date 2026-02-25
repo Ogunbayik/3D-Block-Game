@@ -7,7 +7,7 @@ using Zenject;
 
 public class BaseShape : MonoBehaviour, IPoolable<IMemoryPool>
 {
-    private ShapeAnimationController controller;
+    private ShapeAnimationController _animationController;
 
     public event Action OnClicked;
     public event Action OnPlacedStarted;
@@ -29,10 +29,8 @@ public class BaseShape : MonoBehaviour, IPoolable<IMemoryPool>
 
     public int DraggableLayer => _draggableLayer;
     public int ReleasedLayer => _releasedLayer;
-    private void Awake()
-    {
-        controller = GetComponent<ShapeAnimationController>();
-    }
+    private void Awake() => _animationController = GetComponent<ShapeAnimationController>();
+        
     public void OnSpawned(IMemoryPool pool)
     {
         _pool = pool;
@@ -72,6 +70,7 @@ public class BaseShape : MonoBehaviour, IPoolable<IMemoryPool>
             }
         }
     }
+    public void PlayPlacedAnimation() => _animationController.PlayJellySequence();
     public void SetSpawnPosition(Vector3 position) => _spawnPosition = position;
     public void ChangeLayerOfAllBlocks(int targetLayerID)
     {

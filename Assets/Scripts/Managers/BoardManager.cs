@@ -114,27 +114,40 @@ public class BoardManager : MonoBehaviour
         if (!CheckIfShapeFits(selectedShape))
             return false;
 
-        HandlePlaceSequence(selectedShape).Forget();
+        HandlePlaceSequence(selectedShape);
 
         return true;
     }
-    private async UniTask HandlePlaceSequence(BaseShape selectedShape)
+    private void HandlePlaceSequence(BaseShape selectedShape)
     {
         float jellyDuration = 0.6f;
         Sequence placeSequence = DOTween.Sequence();
 
-        //Ýlk olarak Node Occupied edilecek.
         SetNodeOccupied(selectedShape, true);
 
         var targetPosition = WorldToGridPosition(selectedShape.transform.position);
         selectedShape.transform.position = new Vector3(targetPosition.x, 0f, targetPosition.y);
 
-        ShapeAnimationController shapeAnimation = selectedShape.GetComponent<ShapeAnimationController>();
-
-        placeSequence.AppendCallback(() => shapeAnimation.PlayJellySequence());
+        placeSequence.AppendCallback(() => selectedShape.PlayPlacedAnimation());
         placeSequence.AppendInterval(jellyDuration);
-        placeSequence.AppendCallback(() => ToggleNodeBlock(selectedShape, true));
-        placeSequence.JoinCallback(() => selectedShape.ReturnToPool());
+        placeSequence.AppendCallback(() =>
+        {
+            SetBlockScale(selectedShape);
+            ToggleNodeBlock(selectedShape, true);
+            selectedShape.ReturnToPool();
+        });
+    }
+    private void SetBlockScale(BaseShape selectedShape)
+    {
+        var shapeblocks = selectedShape.ActiveBlocks;
+
+        foreach (var block in shapeblocks)
+        {
+            var blockPosition = WorldToGridPosition(block.transform.position);
+            GridNode targetNode = _allGridNodes[blockPosition.x, blockPosition.y];
+
+            targetNode.Block.SetScale(Vector3.one);
+        }
     }
     private void SetNodeOccupied(BaseShape selectedShape, bool isActive)
     {
@@ -165,17 +178,38 @@ public class BoardManager : MonoBehaviour
         //Dikey objeler eklendi.
         CollectVerticalMatch();
 
-        if (_gridNodeHash.Count > 0)
+        HandleRemoveSequence();
+    }
+    private void HandleRemoveSequence()
+    {
+        var blockAnimationDuration = 0.6f;
+        Sequence removeSequence = DOTween.Sequence();
+        var rowMatchCount = GetFullRowIndices().Count;
+        var colMatchCount = GetFullColIndices().Count;
+
+        removeSequence.AppendCallback(() => PlayBlockAnimation(_gridNodeHash));
+
+        removeSequence.AppendInterval(blockAnimationDuration);
+
+        removeSequence.AppendCallback(() =>
         {
-            var rowMatchCount = GetFullRowIndices().Count;
-            var colMatchCount = GetFullColIndices().Count;
-
-            _signalBus.Fire(new GameSignal.OnMatchesFound(rowMatchCount,colMatchCount));
-
-            RemoveBlocks(_gridNodeHash);
-
+            _signalBus.Fire(new GameSignal.OnMatchesFound(rowMatchCount, colMatchCount));
+            RemoveGridBlock(_gridNodeHash);
             _gridNodeHash.Clear();
+        });
+    }
+    private void PlayBlockAnimation(HashSet<GridNode> gridNodes)
+    {
+        if(gridNodes.Count > 0)
+        {
+            foreach (var node in gridNodes)
+                node.Block.PlayMatchAnimation();
         }
+    }
+    private void RemoveGridBlock(HashSet<GridNode> gridToMatch)
+    {
+        foreach(var gridNode in gridToMatch)
+            gridNode.Clear();
     }
     private void CollectHorizontalMatch()
     {
@@ -262,13 +296,6 @@ public class BoardManager : MonoBehaviour
                 return false;
         }
         return true;
-    }
-    private void RemoveBlocks(HashSet<GridNode> gridToMatch)
-    {
-        foreach(var gridNode in gridToMatch)
-        {
-            gridNode.Clear();
-        }
     }
     private List<int> GetFullRowIndices()
     {

@@ -70,6 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbb03266d40e7304997694491eb84710, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animationController: {fileID: 8317603716340633161}
   _allChildBlocks:
   - {fileID: 7924063245659761313}
   - {fileID: 7395274786932118619}

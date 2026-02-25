@@ -5,29 +5,16 @@ using DG.Tweening;
 
 public class BlockAnimationController : MonoBehaviour
 {
-    [Header("Jelly Animation")]
-    [SerializeField] private Vector3 _squashScale;
-    [SerializeField] private float _squashDuration;
-    [SerializeField] private Vector3 _stretchScale;
-    [SerializeField] private float _stretchDuration;
-    [SerializeField] private float _recoveryDuration;
-
-    private void Update()
+    [Header("Pulse Dissolve Settings")]
+    [SerializeField] private Vector3 _growthScale;
+    [SerializeField] private float _growthDuration;
+    [SerializeField] private float _dissolveDuration;
+    public void PlayPulseDissolve()
     {
-        TestWithSpace.TestCode(PlayJellySequence);
+        Sequence dissolveSequnce = DOTween.Sequence();
+
+        dissolveSequnce.Append(transform.DOScale(_growthScale,_growthDuration));
+
+        dissolveSequnce.Append(transform.DOScale(Vector3.zero, _dissolveDuration));
     }
-    public void PlayJellySequence()
-    {
-        transform.DOKill();
-        Vector3 originalScale = Vector3.one;
-
-        Sequence jellySequence = DOTween.Sequence();
-
-        jellySequence.Append(transform.DOScale(_squashScale, _squashDuration).SetEase(Ease.InQuad));
-
-        jellySequence.Append(transform.DOScale(_stretchScale, _stretchDuration).SetEase(Ease.InQuad));
-
-        jellySequence.Append(transform.DOScale(originalScale, _recoveryDuration).SetEase(Ease.OutElastic));
-    }
-
 }
